@@ -1,0 +1,13 @@
+Feature,Explanation,Measurement
+Age,Age of the patient,Years
+Anaemia,Decrease of red blood cells or hemoglobin,Boolean
+High blood pressure,If a patient has hypertension,Boolean
+Creatinine phosphokinase (CPK),Level of the CPK enzyme in the blood,mcg/L
+Diabetes,If the patient has diabetes,Boolean
+Ejection fraction,Percentage of blood leaving,Percentage
+Sex,Woman or man,Binary
+Platelets,Platelets in the blood,kiloplatelets/mL
+Serum creatinine,Level of creatinine in the blood,mg/dL
+Serum sodium,Level of sodium in the blood,mEq/L
+Smoking,If the patient smokes,Boolean
+Time,Follow-up period,Days
