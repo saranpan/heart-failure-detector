@@ -1,0 +1,412 @@
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 32c96c1..c0be6a7 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,2 +1,5 @@[m
+[32m+[m[32m__pycache__/[m
+ .env[m
+[31m-/node_modules[m
+\ No newline at end of file[m
+[32m+[m[32mkaggle.json[m
+[32m+[m[32mtempCodeRunnerFile.py[m
+[32m+[m[32m/static/[m
+\ No newline at end of file[m
+[1mdiff --git a/Procfile b/Procfile[m
+[1mindex 8001d1a..645733f 100644[m
+[1m--- a/Procfile[m
+[1m+++ b/Procfile[m
+[36m@@ -1 +1 @@[m
+[31m-web: gunicorn app:app[m
+\ No newline at end of file[m
+[32m+[m[32mweb: sh setup.sh && streamlit run app.py[m
+\ No newline at end of file[m
+[1mdiff --git a/app.py b/app.py[m
+[1mindex 0a204dc..12793bf 100644[m
+[1m--- a/app.py[m
+[1m+++ b/app.py[m
+[36m@@ -1,22 +1,31 @@[m
+[31m-from data import import_dataset[m
+[31m-import numpy as np[m
+[31m-import pandas as pd[m
+[32m+[m[32m#from data import import_dataset[m
+[32m+[m[32mfrom package.util import import_dataset, cat_num_feature_seperator, statistical_inference[m
+[32m+[m[32mimport numpy as np, pandas as pd[m
+[32m+[m[32mimport plotly.express as px[m
+[32m+[m[32mimport plotly.graph_objects as go[m
+[32m+[m
+[32m+[m
+[32m+[m[32mfrom pandas_profiling import ProfileReport[m
+[32m+[m
+[32m+[m[32mimport base64[m
+[32m+[m[32mimport xlsxwriter[m
+[32m+[m[32mfrom io import BytesIO[m
+[32m+[m[32mfrom pyxlsb import open_workbook as open_xlsb[m
+[32m+[m
+[32m+[m[32mimport requests[m
+[32m+[m[32mfrom pickle import load[m
+[32m+[m[32mfrom copy import deepcopy[m
+[32m+[m[32mfrom PIL import Image[m
+[32m+[m[32mfrom time import sleep[m
+[32m+[m[32mfrom datetime import date[m
+[32m+[m
+ import streamlit as st[m
+ from streamlit_option_menu import option_menu[m
+ import streamlit.components.v1 as components[m
+[31m-from pickle import load[m
+[31m-import requests[m
+ from streamlit_lottie import st_lottie[m
+[31m-from PIL import Image[m
+[31m-import base64[m
+[31m-import plotly.express as px[m
+[31m-from copy import deepcopy[m
+[31m-from pandas_profiling import ProfileReport[m
+ from streamlit_pandas_profiling import st_profile_report[m
+[31m-from time import sleep[m
+[31m-from io import BytesIO[m
+[31m-from pyxlsb import open_workbook as open_xlsb[m
+[31m-import xlsxwriter[m
+[32m+[m[32mfrom streamlit_chat import message as st_message[m
+[32m+[m
+ [m
+ #import model # trained on shorturl.at/gyAR1[m
+ pickled_model = load(open('model.pkl', 'rb'))[m
+[36m@@ -25,17 +34,21 @@[m [mpickled_model = load(open('model.pkl', 'rb'))[m
+ import_dataset('https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data')[m
+ [m
+ [m
+[31m-# Streamlit[m
+[32m+[m[32m# Streamlit page[m
+ st.set_page_config(page_title='Hobot',page_icon=':man:',[m
+[31m-                    layout="wide",[m
+[31m-                    menu_items={[m
+[31m-         'Get Help': 'https://www.extremelycoolapp.com/help',[m
+[31m-         'Report a bug': "https://www.extremelycoolapp.com/bug",[m
+[31m-         'About': "# This is a header. This is an *extremely* cool app!"[m
+[31m-     })[m
+[32m+[m[32m                    layout="wide"[m
+[32m+[m[32m     )[m
+[32m+[m
+[32m+[m[32m# Hide hamburget and footer[m
+[32m+[m[32mhide_streamlit_style = """[m
+[32m+[m[32m            <style>[m
+[32m+[m[32m            footer {visibility: hidden;}[m
+[32m+[m[32m            </style>[m
+[32m+[m[32m            """[m
+[32m+[m[32mst.markdown(hide_streamlit_style, unsafe_allow_html=True)[m[41m [m
+ [m
+ @st.experimental_memo[m
+[31m-def get_data(map=False):[m
+[32m+[m[32mdef get_data(map=False,reverse_map=False):[m
+     df = pd.read_csv('heart-failure-clinical-data/heart_failure_clinical_records_dataset.csv')[m
+     df = df.astype({"age": int, "platelets": int,"serum_creatinine":float})[m
+     [m
+[36m@@ -47,6 +60,12 @@[m [mdef get_data(map=False):[m
+ [m
+     return df[m
+ [m
+[32m+[m[32mdef reverse_data(df):[m
+[32m+[m[32m        rdf = deepcopy(df)[m
+[32m+[m[32m        rdf.replace({'sex':{'Female':0,'Male':1}} , inplace = True)[m[41m [m
+[32m+[m[32m        rdf.replace({False:0,True:1},inplace=True)[m
+[32m+[m[32m        return rdf[m
+[32m+[m
+ @st.experimental_memo[m
+ def get_meta_data():[m
+     mdf = pd.read_csv('metadata.csv')[m
+[36m@@ -56,20 +75,21 @@[m [mdef html_reader(html_file):[m
+     HtmlFile = open(html_file, 'r', encoding='utf-8')[m
+     page = HtmlFile.read() [m
+     components.html(page,scrolling=False)[m
+[31m-    [m
+ [m
+[31m-df = get_data()[m
+[31m-mdf = get_meta_data()[m
+[31m-query_df = df[m
+[31m-#For page INSIGHT[m
+[31m-map_df = get_data(map=True)[m
+[32m+[m[32m@st.experimental_singleton[m[41m [m
+[32m+[m[32mdef load_model():[m
+[32m+[m[32m    pickled_model = load(open('model.pkl', 'rb'))[m
+ [m
+[32m+[m[32m    return pickled_model[m
+[32m+[m
+[32m+[m[32m@st.experimental_singleton(show_spinner=False)[m
+ def load_lottie_url(url):[m
+     r = requests.get(url)[m
+     if r.status_code != 200:[m
+         return None[m
+     return r.json()[m
+ [m
+[32m+[m[32m@st.experimental_singleton[m[41m [m
+ def to_excel(df):[m
+     output = BytesIO()[m
+     writer = pd.ExcelWriter(output, engine='xlsxwriter')[m
+[36m@@ -82,16 +102,43 @@[m [mdef to_excel(df):[m
+     processed_data = output.getvalue()[m
+     return processed_data[m
+ [m
+[32m+[m[32mdef clear_old_cach():[m
+[32m+[m[32m    if 'call_button' in st.session_state:[m
+[32m+[m[32m                del st.session_state['call_button'][m[41m [m
+[32m+[m
+[32m+[m[32m    if 'submit_yet' in st.session_state:[m
+[32m+[m[32m                del st.session_state['submit_yet'][m
+[32m+[m
+[32m+[m[32m#def styling_df(DEATH_EVENT):[m
+[32m+[m[32m#    colors = {[m
+[32m+[m[32m#        'True':'red',[m
+[32m+[m[32m#        'False':'green'[m
+[32m+[m[32m#        }[m
+[32m+[m[32m#    return f"background-color: {colors[DEATH_EVENT]}"[m
+[32m+[m[41m        [m
+[32m+[m
+[32m+[m
+[32m+[m[32mdf = get_data()[m
+[32m+[m[32mmdf = get_meta_data()[m
+[32m+[m[32mquery_df = df[m
+[32m+[m[32m#For page INSIGHT[m
+[32m+[m[32mmap_df = get_data(map=True)[m
+[32m+[m[32m#For page PREDICTION[m
+[32m+[m[32mmodel = load_model()[m
+[32m+[m
+[32m+[m
+ lottie_dr = load_lottie_url('https://assets9.lottiefiles.com/packages/lf20_hqlvpwat.json')[m
+ lottie_dr2 = load_lottie_url('https://assets5.lottiefiles.com/packages/lf20_vPnn3K.json')[m
+ lottie_dr3 = load_lottie_url('https://assets6.lottiefiles.com/packages/lf20_cbajnb2e.json')[m
+ lottie_dr4 = load_lottie_url('https://assets4.lottiefiles.com/packages/lf20_8zle4p5u.json')[m
+[32m+[m[32mlottie_dr5 = load_lottie_url('https://assets5.lottiefiles.com/packages/lf20_nhp1heev.json')[m
+ [m
+[31m-img_tree_2 = Image.open('graph_tree\dtree_render 1.png')[m
+[31m-img_tree_51 = Image.open('graph_tree\dtree_render 50.png')[m
+[31m-img_tree_89 = Image.open('graph_tree\dtree_render 88.png')[m
+[32m+[m[32mimg_tree_2 = Image.open('static\graph_tree\dtree_render 1.png')[m
+[32m+[m[32mimg_tree_51 = Image.open('static\graph_tree\dtree_render 50.png')[m
+[32m+[m[32mimg_tree_89 = Image.open('static\graph_tree\dtree_render 88.png')[m
+ img = [img_tree_2,img_tree_51,img_tree_89][m
+[31m-img_cfm = Image.open('graph_tree\confusion_matrix.png')[m
+[32m+[m[32mimg_cfm = Image.open('static\confusion_matrix.png')[m
+[32m+[m[32mimg_brand = Image.open('static\Intro.png')[m
+ [m
+ [m
+ [m
+[36m@@ -111,12 +158,19 @@[m [mselected = option_menu([m
+ [m
+ [m
+ if selected == 'Home':[m
+[32m+[m
+[32m+[m[32m    clear_old_cach()[m
+[32m+[m
+     with st.container():[m
+[31m-        st.subheader("Hi, I am Hobot :wave: :man: ")[m
+[31m-        st.title("An A.I Robot who is cardiologists")[m
+[31m-        st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")[m
+[31m-        st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")[m
+[32m+[m[32m        left_column , right_column = st.columns((1,2))[m
+[32m+[m[32m        with left_column:[m
+[32m+[m[32m            st.subheader("Hi, I am Hobot :wave: :man: ")[m
+[32m+[m[32m            st.title("An A.I Robot who is cardiologists")[m
+[32m+[m[32m            st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")[m
+[32m+[m[32m            st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")[m
+         [m
+[32m+[m[32m        with right_column:[m
+[32m+[m[32m            st.image(img_brand,width=1500)[m
+     with st.container():[m
+         st.write("---")[m
+         left_column , right_column = st.columns(2)[m
+[36m@@ -175,7 +229,7 @@[m [mif selected == 'Home':[m
+         with right_column:[m
+             [m
+             st.write("- We used technique StandardScaler + RandomForestClassifier")[m
+[31m-            html_reader('statics/my_estimator.html')[m
+[32m+[m[32m            html_reader('templates/my_estimator.html')[m
+             st.write("- Standardizing the value helps prevent features with wider ranges from dominating the distance metric")[m
+             st.write("- The Random Forest Classifier was chosen as our architecture, since its performance (f1 score) is better among others like Logistic Regression,Support Vector Classifier, and K-nearest neighbor ")[m
+             [m
+[36m@@ -260,7 +314,7 @@[m [mif selected == 'Home':[m
+         st.write("Without the following data, we have no idea how to be Hobot, a cardiology experts")[m
+         st.write("Thank you Davide Chicco & Giuseppe Jurman for publicly shared a research paper that analyzing 299 patients")[m
+         st.write("Thank you LARXEL who upload the dataset in Kaggle")[m
+[31m-        st.write("[Check out the research paper >](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data)")[m
+[32m+[m[32m        st.write("[Check out the research paper >](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5)")[m
+         st.write("[Check out which data I was fed on >](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data)")[m
+ [m
+ [m
+[36m@@ -268,10 +322,13 @@[m [mif selected == 'Home':[m
+ [m
+ # page INSIGHT[m
+ [m
+[31m-if selected == 'Insight':  [m
+[32m+[m[32melif selected == 'Insight':[m[41m  [m
+[32m+[m
+[32m+[m[32m    clear_old_cach()[m
+[32m+[m
+     # Sidebar[m
+     with st.sidebar:[m
+[31m-        selected_type = option_menu(menu_title= "Type of Statistics" , [m
+[32m+[m[32m        selected_type = option_menu(menu_title= "Explore" ,[m[41m [m
+                                 options=["Overview of Data","Interesting insight", 'Inference'],[m
+                                 icons=['bi bi-server', 'bi bi-lightbulb','bi bi-graph-up-arrow'], [m
+                                 menu_icon="cast",[m
+[36m@@ -346,7 +403,7 @@[m [mif selected == 'Insight':[m
+                                         max_value = 285,[m
+                                         value = (4, 285),[m
+                                         step = 1)[m
+[31m-        [m
+[32m+[m[41m            [m
+             query_df = map_df.query([m
+                                     '''[m
+                                         sex == @sex & \[m
+[36m@@ -413,10 +470,346 @@[m [mif selected == 'Insight':[m
+                 sleep(1)[m
+                 st.balloons()[m
+ [m
+[32m+[m[32m    elif selected_type == 'Interesting insight':[m
+[32m+[m[41m        [m
+[32m+[m[32m        st.title("Welcome to Heart Museum")[m
+[32m+[m[32m        st.write("- We will let you explore on interesting insights on your own")[m
+[32m+[m[32m        st.write("---")[m
+[32m+[m[32m        st.header(":rice_scene: Gallery 1")[m
+[32m+[m[32m        st.caption("Sometime, all insight we really want is just the mean and standard deviation of the lab result")[m
+         [m
+[32m+[m[32m        with st.container():[m
+[32m+[m[41m            [m
+[32m+[m[32m            left_column , _ , right_column = st.columns((3,1,3))[m
+[32m+[m[41m            [m
+[32m+[m[32m            with left_column:[m
+[32m+[m[32m                age = st.slider(label = 'Select a range of age',[m
+[32m+[m[32m                            min_value = 40,[m[41m [m
+[32m+[m[32m                            max_value = 95,[m
+[32m+[m[32m                            value = (40, 95),[m
+[32m+[m[32m                            step = 1)[m
+[32m+[m[41m                [m
+[32m+[m[32m                time = st.slider(label = 'Select a range of follow-up period',[m
+[32m+[m[32m                            min_value = 4,[m[41m [m
+[32m+[m[32m                            max_value = 285,[m
+[32m+[m[32m                            value = (4, 285),[m
+[32m+[m[32m                            step = 1)[m
+[32m+[m[41m            [m
+[32m+[m[41m   [m
+[32m+[m[32m            q_df = map_df.query("age >= @age[0] & age <= @age[1]")[m
+[32m+[m[32m            st.write("---")[m
+[32m+[m[32m            with right_column:[m[41m [m
+[32m+[m[32m                disc_feature =  st.selectbox('Which type of group do you want to compare',[m
+[32m+[m[32m                    ('anaemia','diabetes','high_blood_pressure','smoking','DEATH_EVENT'))[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        gdf = q_df.groupby([disc_feature,'sex']).agg({'creatinine_phosphokinase':['mean','std'],[m
+[32m+[m[32m                                                    'ejection_fraction':['mean','std'],[m
+[32m+[m[32m                                                    'platelets':['mean','std'],[m
+[32m+[m[32m                                                    'serum_creatinine':['mean','std'],[m
+[32m+[m[32m                                                    'serum_sodium':['mean','std']}).round(2)[m
+[32m+[m[41m    [m
+[32m+[m
+[32m+[m[32m        with st.container():[m
+[32m+[m[32m            feature  = st.selectbox('Which lab result you want to know',[m
+[32m+[m[32m                ('creatinine_phosphokinase','ejection_fraction','platelets','serum_creatinine','serum_sodium'))[m
+[32m+[m
+[32m+[m
+[32m+[m[32m            # Temporary obtain the mean & std of the selected feature[m
+[32m+[m[32m            ffM = gdf.loc[(False,'Female'),(feature,'mean')][m
+[32m+[m[32m            tfM = gdf.loc[(True,'Female'),(feature,'mean')][m
+[32m+[m
+[32m+[m[32m            ffS = gdf.loc[(False,'Female'),(feature,'std')][m
+[32m+[m[32m            tfS = gdf.loc[(True,'Female'),(feature,'std')][m
+[32m+[m
+[32m+[m
+[32m+[m[32m            fmM = gdf.loc[(False,'Male'),(feature,'mean')][m
+[32m+[m[32m            tmM = gdf.loc[(True,'Male'),(feature,'mean')][m
+[32m+[m
+[32m+[m[32m            fmS = gdf.loc[(False,'Male'),(feature,'std')][m
+[32m+[m[32m            tmS = gdf.loc[(True,'Male'),(feature,'std')][m[41m      [m
+[32m+[m[41m            [m
+[32m+[m[32m            #Start making plots[m
+[32m+[m[32m            fig = go.Figure()[m
+[32m+[m[32m            fig.add_trace(go.Bar([m
+[32m+[m[32m                name='Female',[m
+[32m+[m[32m                x=['False','True'], y=[ffM,tfM],[m
+[32m+[m[32m                error_y=dict(type='data', array=[ffS, tfS])))[m
+[32m+[m[32m            fig.add_trace(go.Bar([m
+[32m+[m[32m                name='Male',[m
+[32m+[m[32m                x=['False','True'], y=[fmM, tmM],[m
+[32m+[m[32m                error_y=dict(type='data', array=[fmS, tmS])))[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m            fig.update_layout(barmode='group',[m
+[32m+[m[32m                            title=f"Mean and Standard deviation of {feature}".replace('_',' ').title(),[m
+[32m+[m[32m                            xaxis_title=disc_feature,[m
+[32m+[m[32m                            legend_title="Sex",[m
+[32m+[m[32m                            font = {'size':16})[m
+[32m+[m
+[32m+[m[32m            fig.update_yaxes(rangemode="nonnegative")[m
+[32m+[m[41m            [m
+[32m+[m[32m            st.plotly_chart(fig)[m[41m     [m
+[32m+[m[41m                [m
+[32m+[m[32m    elif selected_type == 'Inference':[m
+[32m+[m[41m        [m
+[32m+[m[32m        st.title("Statistical Inference :mag_right:")[m
+[32m+[m[32m        st.markdown("""[m
+[32m+[m[32m                 - Sometimes, we can learn something via statistics. We could derive the knowledge from our sample dataset[m
+[32m+[m[41m                 [m
+[32m+[m[32m                 - However, also note that the inference we got does not always true, for example, the proportion of who smoking and don't does not differ in DEATH_EVENT which is not true in real world.[m
+[32m+[m[32m                 So, Viewer discretion is required[m
+[32m+[m[32m                 """)[m
+[32m+[m[41m                       [m
+[32m+[m[32m        cat_df,num_df = cat_num_feature_seperator(map_df)[m
+[32m+[m[32m        cat_feat = cat_df.columns.tolist()[m
+[32m+[m[41m        [m
+[32m+[m[32m        st.write("---")[m
+[32m+[m[32m        st.header(":mortar_board: Labatory 1 : Two Proportion Inference ")[m
+[32m+[m[41m        [m
+[32m+[m[32m        with st.container():[m
+[32m+[m[41m            [m
+[32m+[m[32m            left_column , _ , right_column = st.columns((1,1,2))[m
+[32m+[m
+[32m+[m[32m            with left_column:[m
+[32m+[m[32m                cat_feat = cat_df.columns.tolist()[m
+[32m+[m[32m                selected_feat = cat_feat[m
+[32m+[m[41m                [m
+[32m+[m[32m                # temporary fixing for preserving the old selected label[m
+[32m+[m[32m                try:[m
+[32m+[m[32m                    ix = selected_feat.index(st.session_state.chosen2)[m
+[32m+[m[32m                    selected_feat = cat_feat[:ix] + cat_feat[ix+1:][m
+[32m+[m[41m                    [m
+[32m+[m[32m                    ix2 = selected_feat.index(st.session_state.chosen)[m
+[32m+[m[32m                except:[m
+[32m+[m[32m                    ix2 = 0[m
+[32m+[m[41m                    [m
+[32m+[m[32m                feature_1 = st.selectbox('Between',[m
+[32m+[m[32m                                        selected_feat,[m[41m   [m
+[32m+[m[32m                                        key='chosen',[m
+[32m+[m[32m                                        index=ix2)[m
+[32m+[m[41m                [m
+[32m+[m[32m                ix = cat_feat.index(st.session_state.chosen)[m
+[32m+[m[32m                selected_feat = cat_feat[:ix] + cat_feat[ix+1:][m
+[32m+[m[41m                [m
+[32m+[m[32m                # temporary fixing for preserving the old selected label[m
+[32m+[m[32m                try:[m
+[32m+[m[32m                    ix2 = selected_feat.index(st.session_state.chosen2)[m
+[32m+[m[32m                except:[m
+[32m+[m[32m                    ix2 = 0[m
+[32m+[m[41m                [m
+[32m+[m[32m                ### Fix more : feature 2 does limit feature 1[m[41m [m
+[32m+[m[32m                feature_2 = st.selectbox('Is there any difference in',[m
+[32m+[m[32m                        selected_feat,[m[41m   [m
+[32m+[m[32m                        key='chosen2',[m
+[32m+[m[32m                        index = ix2)[m
+[32m+[m[41m                [m
+[32m+[m
+[32m+[m[32m                significance = st.select_slider([m
+[32m+[m[32m                    'Select a significance level',[m
+[32m+[m[32m                     options=[0.01, 0.025, 0.05, 0.1],[m
+[32m+[m[32m                     value = 0.05)[m
+[32m+[m
+[32m+[m[41m            [m
+[32m+[m[32m            with right_column:[m
+[32m+[m[32m                test = statistical_inference(map_df, feature_1, feature_2,significance=significance)[m
+[32m+[m[32m                st.plotly_chart(test.two_proportion_inference_plot())[m
+[32m+[m
+[32m+[m[32m        st.write(f"Your question : Is there any significantly difference of the proportion of {feature_2} between each level {feature_1} with {significance * 100}% significance level ?")[m
+[32m+[m[32m        if st.button("Proceed"):[m
+[32m+[m[32m            st.write("---")[m
+[32m+
