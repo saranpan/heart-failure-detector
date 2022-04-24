@@ -1,22 +1,31 @@
-from data import import_dataset
-import numpy as np
-import pandas as pd
+#from data import import_dataset
+from package.util import import_dataset, cat_num_feature_seperator, statistical_inference
+import numpy as np, pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+
+from pandas_profiling import ProfileReport
+
+import base64
+import xlsxwriter
+from io import BytesIO
+from pyxlsb import open_workbook as open_xlsb
+
+import requests
+from pickle import load
+from copy import deepcopy
+from PIL import Image
+from time import sleep
+from datetime import date
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
-from pickle import load
-import requests
 from streamlit_lottie import st_lottie
-from PIL import Image
-import base64
-import plotly.express as px
-from copy import deepcopy
-from pandas_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
-from time import sleep
-from io import BytesIO
-from pyxlsb import open_workbook as open_xlsb
-import xlsxwriter
+from streamlit_chat import message as st_message
+
 
 #import model # trained on shorturl.at/gyAR1
 pickled_model = load(open('model.pkl', 'rb'))
@@ -25,17 +34,21 @@ pickled_model = load(open('model.pkl', 'rb'))
 import_dataset('https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data')
 
 
-# Streamlit
+# Streamlit page
 st.set_page_config(page_title='Hobot',page_icon=':man:',
-                    layout="wide",
-                    menu_items={
-         'Get Help': 'https://www.extremelycoolapp.com/help',
-         'Report a bug': "https://www.extremelycoolapp.com/bug",
-         'About': "# This is a header. This is an *extremely* cool app!"
-     })
+                    layout="wide"
+     )
+
+# Hide hamburget and footer
+hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 @st.experimental_memo
-def get_data(map=False):
+def get_data(map=False,reverse_map=False):
     df = pd.read_csv('heart-failure-clinical-data/heart_failure_clinical_records_dataset.csv')
     df = df.astype({"age": int, "platelets": int,"serum_creatinine":float})
     
@@ -47,6 +60,12 @@ def get_data(map=False):
 
     return df
 
+def reverse_data(df):
+        rdf = deepcopy(df)
+        rdf.replace({'sex':{'Female':0,'Male':1}} , inplace = True) 
+        rdf.replace({False:0,True:1},inplace=True)
+        return rdf
+
 @st.experimental_memo
 def get_meta_data():
     mdf = pd.read_csv('metadata.csv')
@@ -56,20 +75,21 @@ def html_reader(html_file):
     HtmlFile = open(html_file, 'r', encoding='utf-8')
     page = HtmlFile.read() 
     components.html(page,scrolling=False)
-    
 
-df = get_data()
-mdf = get_meta_data()
-query_df = df
-#For page INSIGHT
-map_df = get_data(map=True)
+@st.experimental_singleton 
+def load_model():
+    pickled_model = load(open('model.pkl', 'rb'))
 
+    return pickled_model
+
+@st.experimental_singleton(show_spinner=False)
 def load_lottie_url(url):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
 
+@st.experimental_singleton 
 def to_excel(df):
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -82,16 +102,43 @@ def to_excel(df):
     processed_data = output.getvalue()
     return processed_data
 
+def clear_old_cach():
+    if 'call_button' in st.session_state:
+                del st.session_state['call_button'] 
+
+    if 'submit_yet' in st.session_state:
+                del st.session_state['submit_yet']
+
+#def styling_df(DEATH_EVENT):
+#    colors = {
+#        'True':'red',
+#        'False':'green'
+#        }
+#    return f"background-color: {colors[DEATH_EVENT]}"
+        
+
+
+df = get_data()
+mdf = get_meta_data()
+query_df = df
+#For page INSIGHT
+map_df = get_data(map=True)
+#For page PREDICTION
+model = load_model()
+
+
 lottie_dr = load_lottie_url('https://assets9.lottiefiles.com/packages/lf20_hqlvpwat.json')
 lottie_dr2 = load_lottie_url('https://assets5.lottiefiles.com/packages/lf20_vPnn3K.json')
 lottie_dr3 = load_lottie_url('https://assets6.lottiefiles.com/packages/lf20_cbajnb2e.json')
 lottie_dr4 = load_lottie_url('https://assets4.lottiefiles.com/packages/lf20_8zle4p5u.json')
+lottie_dr5 = load_lottie_url('https://assets5.lottiefiles.com/packages/lf20_nhp1heev.json')
 
-img_tree_2 = Image.open('graph_tree\dtree_render 1.png')
-img_tree_51 = Image.open('graph_tree\dtree_render 50.png')
-img_tree_89 = Image.open('graph_tree\dtree_render 88.png')
+img_tree_2 = Image.open('static\graph_tree\dtree_render 1.png')
+img_tree_51 = Image.open('static\graph_tree\dtree_render 50.png')
+img_tree_89 = Image.open('static\graph_tree\dtree_render 88.png')
 img = [img_tree_2,img_tree_51,img_tree_89]
-img_cfm = Image.open('graph_tree\confusion_matrix.png')
+img_cfm = Image.open('static\confusion_matrix.png')
+img_brand = Image.open('static\Intro.png')
 
 
 
@@ -111,12 +158,19 @@ selected = option_menu(
 
 
 if selected == 'Home':
+
+    clear_old_cach()
+
     with st.container():
-        st.subheader("Hi, I am Hobot :wave: :man: ")
-        st.title("An A.I Robot who is cardiologists")
-        st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")
-        st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")
+        left_column , right_column = st.columns((1,2))
+        with left_column:
+            st.subheader("Hi, I am Hobot :wave: :man: ")
+            st.title("An A.I Robot who is cardiologists")
+            st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")
+            st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")
         
+        with right_column:
+            st.image(img_brand,width=1500)
     with st.container():
         st.write("---")
         left_column , right_column = st.columns(2)
@@ -175,7 +229,7 @@ if selected == 'Home':
         with right_column:
             
             st.write("- We used technique StandardScaler + RandomForestClassifier")
-            html_reader('statics/my_estimator.html')
+            html_reader('templates/my_estimator.html')
             st.write("- Standardizing the value helps prevent features with wider ranges from dominating the distance metric")
             st.write("- The Random Forest Classifier was chosen as our architecture, since its performance (f1 score) is better among others like Logistic Regression,Support Vector Classifier, and K-nearest neighbor ")
             
@@ -260,7 +314,7 @@ if selected == 'Home':
         st.write("Without the following data, we have no idea how to be Hobot, a cardiology experts")
         st.write("Thank you Davide Chicco & Giuseppe Jurman for publicly shared a research paper that analyzing 299 patients")
         st.write("Thank you LARXEL who upload the dataset in Kaggle")
-        st.write("[Check out the research paper >](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data)")
+        st.write("[Check out the research paper >](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5)")
         st.write("[Check out which data I was fed on >](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data)")
 
 
@@ -268,10 +322,13 @@ if selected == 'Home':
 
 # page INSIGHT
 
-if selected == 'Insight':  
+elif selected == 'Insight':  
+
+    clear_old_cach()
+
     # Sidebar
     with st.sidebar:
-        selected_type = option_menu(menu_title= "Type of Statistics" , 
+        selected_type = option_menu(menu_title= "Explore" , 
                                 options=["Overview of Data","Interesting insight", 'Inference'],
                                 icons=['bi bi-server', 'bi bi-lightbulb','bi bi-graph-up-arrow'], 
                                 menu_icon="cast",
@@ -346,7 +403,7 @@ if selected == 'Insight':
                                         max_value = 285,
                                         value = (4, 285),
                                         step = 1)
-        
+            
             query_df = map_df.query(
                                     '''
                                         sex == @sex & \
@@ -413,10 +470,346 @@ if selected == 'Insight':
                 sleep(1)
                 st.balloons()
 
+    elif selected_type == 'Interesting insight':
         
+        st.title("Welcome to Heart Museum")
+        st.write("- We will let you explore on interesting insights on your own")
+        st.write("---")
+        st.header(":rice_scene: Gallery 1")
+        st.caption("Sometime, all insight we really want is just the mean and standard deviation of the lab result")
+        
+        with st.container():
+            
+            left_column , _ , right_column = st.columns((3,1,3))
+            
+            with left_column:
+                age = st.slider(label = 'Select a range of age',
+                            min_value = 40, 
+                            max_value = 95,
+                            value = (40, 95),
+                            step = 1)
+                
+                time = st.slider(label = 'Select a range of follow-up period',
+                            min_value = 4, 
+                            max_value = 285,
+                            value = (4, 285),
+                            step = 1)
+            
+   
+            q_df = map_df.query("age >= @age[0] & age <= @age[1]")
+            st.write("---")
+            with right_column: 
+                disc_feature =  st.selectbox('Which type of group do you want to compare',
+                    ('anaemia','diabetes','high_blood_pressure','smoking','DEATH_EVENT'))
+
+
+        gdf = q_df.groupby([disc_feature,'sex']).agg({'creatinine_phosphokinase':['mean','std'],
+                                                    'ejection_fraction':['mean','std'],
+                                                    'platelets':['mean','std'],
+                                                    'serum_creatinine':['mean','std'],
+                                                    'serum_sodium':['mean','std']}).round(2)
+    
+
+        with st.container():
+            feature  = st.selectbox('Which lab result you want to know',
+                ('creatinine_phosphokinase','ejection_fraction','platelets','serum_creatinine','serum_sodium'))
+
+
+            # Temporary obtain the mean & std of the selected feature
+            ffM = gdf.loc[(False,'Female'),(feature,'mean')]
+            tfM = gdf.loc[(True,'Female'),(feature,'mean')]
+
+            ffS = gdf.loc[(False,'Female'),(feature,'std')]
+            tfS = gdf.loc[(True,'Female'),(feature,'std')]
+
+
+            fmM = gdf.loc[(False,'Male'),(feature,'mean')]
+            tmM = gdf.loc[(True,'Male'),(feature,'mean')]
+
+            fmS = gdf.loc[(False,'Male'),(feature,'std')]
+            tmS = gdf.loc[(True,'Male'),(feature,'std')]      
+            
+            #Start making plots
+            fig = go.Figure()
+            fig.add_trace(go.Bar(
+                name='Female',
+                x=['False','True'], y=[ffM,tfM],
+                error_y=dict(type='data', array=[ffS, tfS])))
+            fig.add_trace(go.Bar(
+                name='Male',
+                x=['False','True'], y=[fmM, tmM],
+                error_y=dict(type='data', array=[fmS, tmS])))
+
+
+
+            fig.update_layout(barmode='group',
+                            title=f"Mean and Standard deviation of {feature}".replace('_',' ').title(),
+                            xaxis_title=disc_feature,
+                            legend_title="Sex",
+                            font = {'size':16})
+
+            fig.update_yaxes(rangemode="nonnegative")
+            
+            st.plotly_chart(fig)     
+                
+    elif selected_type == 'Inference':
+        
+        st.title("Statistical Inference :mag_right:")
+        st.markdown("""
+                 - Sometimes, we can learn something via statistics. We could derive the knowledge from our sample dataset
+                 
+                 - However, also note that the inference we got does not always true, for example, the proportion of who smoking and don't does not differ in DEATH_EVENT which is not true in real world.
+                 So, Viewer discretion is required
+                 """)
+                       
+        cat_df,num_df = cat_num_feature_seperator(map_df)
+        cat_feat = cat_df.columns.tolist()
+        
+        st.write("---")
+        st.header(":mortar_board: Labatory 1 : Two Proportion Inference ")
+        
+        with st.container():
+            
+            left_column , _ , right_column = st.columns((1,1,2))
+
+            with left_column:
+                cat_feat = cat_df.columns.tolist()
+                selected_feat = cat_feat
+                
+                # temporary fixing for preserving the old selected label
+                try:
+                    ix = selected_feat.index(st.session_state.chosen2)
+                    selected_feat = cat_feat[:ix] + cat_feat[ix+1:]
+                    
+                    ix2 = selected_feat.index(st.session_state.chosen)
+                except:
+                    ix2 = 0
+                    
+                feature_1 = st.selectbox('Between',
+                                        selected_feat,   
+                                        key='chosen',
+                                        index=ix2)
+                
+                ix = cat_feat.index(st.session_state.chosen)
+                selected_feat = cat_feat[:ix] + cat_feat[ix+1:]
+                
+                # temporary fixing for preserving the old selected label
+                try:
+                    ix2 = selected_feat.index(st.session_state.chosen2)
+                except:
+                    ix2 = 0
+                
+                ### Fix more : feature 2 does limit feature 1 
+                feature_2 = st.selectbox('Is there any difference in',
+                        selected_feat,   
+                        key='chosen2',
+                        index = ix2)
+                
+
+                significance = st.select_slider(
+                    'Select a significance level',
+                     options=[0.01, 0.025, 0.05, 0.1],
+                     value = 0.05)
+
+            
+            with right_column:
+                test = statistical_inference(map_df, feature_1, feature_2,significance=significance)
+                st.plotly_chart(test.two_proportion_inference_plot())
+
+        st.write(f"Your question : Is there any significantly difference of the proportion of {feature_2} between each level {feature_1} with {significance * 100}% significance level ?")
+        if st.button("Proceed"):
+            st.write("---")
+            st.subheader("Step 1 : Hypothesis Testing")
+            st.write(f"Null Hypothesis : There is no significantly difference of the proportion of {feature_2} between each level {feature_1}")
+            st.write(f"Alternative Hypothesis : There is significantly difference of the proportion of {feature_2} between each level {feature_1}")
+            
+            st.subheader("Step 2 : Significance level")
+            st.write(f"If the probability of true null hypothesis got rejected is lower than {significance}, it's acceptable to reject it")
+            
+            st.subheader("Step 3 : Statistical Testing")
+            stat,p_value,conclusion = test.two_proportion_inference()
+            
+            st.write(f"Z-score : {stat}")
+            st.write(f"P-value : {p_value}")
+            
+            if p_value > significance:
+                st.warning(conclusion)
+            else:
+                st.success(conclusion)
+                
+
+        
+        st.write("---")
+        
+        for i in range(10):
+            st.text(" ") 
+            
+        
+        st_lottie(lottie_dr5,height=600)
+        st.text("                         New Inference Labatories are coming soon")
 # page PREDICTION
-if selected == 'Prediction': 
-    st.title("predict")
+elif selected == 'Prediction': 
+
+    with st.container():
+        st.title("Predict a patient")
+        st.write("""
+        We want to remind you once again to read our medical disclaimer before predicting. 
+        Furthermore, Our model is suitable for only the patient who once had
+        - :broken_heart: Heart failure 
+        - :boom: Left ventricular systolic dysfunction
+
+        For those who does not have the following properties may not obtain an accurate prediction
+        """)
+
+        if 'call_button' not in st.session_state:
+                st.session_state['call_button'] = False
+        
+        proceed = st.checkbox("I understand and wish to proceed",key='proceed')
+        proceed_2 = st.button("Call Hobot",disabled=not proceed)
+        if proceed_2:
+            st.session_state['call_button'] = True
+
+    if proceed & st.session_state['call_button']:
+
+        # Customize run time
+        if 'submit_yet' not in st.session_state:
+                st.session_state['submit_yet'] = 1
+
+        def change_run_sec():
+            st.session_state['submit_yet'] = 0
 
 
-#---------side bar-------#
+        run_sec = st.session_state['submit_yet']
+
+
+        with st.spinner('We are directing chat to the Hobot'):
+            sleep(run_sec)
+        
+        # Generate chat
+        st.write("---")
+        st.title("Chat Room")
+        sleep(run_sec)
+        st_message('Hello I am Hobot, an AI who is cardiologist',avatar_style='miniavs')
+        sleep(run_sec)
+        st_message("Hi",is_user=True)
+        sleep(run_sec)
+        st_message('To predict the chance of having heart failure',avatar_style='miniavs')
+        sleep(run_sec)
+        st_message('I would like to know your simple bio, Medical condition, and lab result',avatar_style='miniavs')
+        sleep(run_sec)
+        st_message("Here is mine",is_user=True)
+        sleep(run_sec)
+
+
+        with st.form(key='Form1'):
+                st.caption("Now, filling out your Simple bio, Medical condition, and lab result respectively in this form")
+                st.header("Step 1 : Your simple bio :bust_in_silhouette:")
+                sex = st.selectbox(label = "What is your sex", 
+                                                        options=map_df['sex'].unique())
+
+                age = st.number_input(label = 'What is your age (years)',min_value=0,step=5,value=65)
+
+                smoking = st.selectbox(label = "Do you smoke ?", 
+                                    options=[False,True]
+                                )  
+
+                st.write("---")                        
+                st.header("Step 2 : Your medical condition :pill:")
+
+                anaemia = st.selectbox(label = "Do you have Anaemia ?", 
+                                        options=map_df['anaemia'].unique()
+                                            )
+                high_blood_pressure = st.selectbox(label = "Do you have high blood pressure (>=130 mm/Hg)?", 
+                                                options=[False,True]
+                                            )
+                diabetes = st.selectbox(label = "Are you Diabetes ?", 
+                                                options=map_df['diabetes'].unique()    
+                                            )
+        
+                st.write("---")
+                st.header("Step 3 : Your Lab Result :page_with_curl:")
+
+                creatinine_phosp = st.number_input(label = 'What is CPK enzyme level in your blood',
+                                                    min_value=0 , step=100,value= 7350,
+                                                    )
+                
+                platelets = st.number_input(label = 'How many platelets in your blood',
+                                            min_value=0 , step=1000,value=800000,
+                                            )   
+
+                ejection_fraction = st.number_input(label = 'What is percentage of blood leaving',
+                                            min_value=0 , step=1,value=52,
+                                            )   
+
+                serum_creatinine = st.number_input(label = 'What is creatinine level in your blood',
+                                            min_value=0.00,value=5.35,
+                                            )   
+
+                serum_sodium = st.number_input(label = 'What is sodium level in your blood',
+                                            min_value=0 , step=1,value=115,
+                                            )   
+                
+                st.write("---")
+                last_date = st.date_input(label = 'When did you received the last treatment from your doctor',max_value = date.today(),
+                                        )
+                time = date.today() - last_date
+                time = time.days
+                #st.write(f"You met them last {time.days} days")
+                submit_button = st.form_submit_button("Send !",on_click=change_run_sec)
+
+        if submit_button:
+            input = {'age':age,'anaemia':anaemia,'creatinine_phosphokinase':creatinine_phosp,
+                    'diabetes':diabetes,'ejection_fraction':ejection_fraction,'high_blood_pressure':high_blood_pressure,
+                    'platelets':platelets,'serum_creatinine':serum_creatinine,'serum_sodium':serum_sodium,
+                    'sex':sex,'smoking':smoking,'time':time}
+
+            input = pd.DataFrame([input])
+
+            input = reverse_data(input)
+            
+            output = model.predict(input)[0]
+            output_prob = model.predict_proba(input)[0]
+
+            st_message('Let me analyzing your information ... ',avatar_style='miniavs')
+            sleep(3)
+            if output == 0:
+                sleep(1)
+                st_message('🙂 Congratulation, you are more unlikely to have heart failure',
+                            avatar_style='miniavs')
+                
+                st.balloons()
+                st_message(f'However, If I was wrong. The chance of having heart failure is {round(output_prob[1],4)*100} %',
+                            avatar_style='miniavs')    
+            elif output == 1:
+                st_message('☹️ We are sorry to hear that. With the following status, you are likely to have heart failure more than do not',
+                            avatar_style='miniavs')
+
+                st_message(f'The chance of having heart failure is {round(output_prob[1],4)*100} %',
+                            avatar_style='miniavs')    
+
+                sleep(2)
+                st_message(f'We recommend you to take an extremely care of yourself and having somebody near you to help you when you have heart failure',
+                            avatar_style='miniavs')   
+            
+            st.text(" ")
+            left_column, _ , middle_column , _ , right_column = st.columns((4,2,2,1,4))
+            
+            with left_column:
+                st.write("---")
+
+            with middle_column:
+                st.caption("end chat")
+
+            with right_column:
+                st.write("---")
+
+
+
+            #st.write(output)
+            #st.write(output_prob)
+
+
+            
+
+            #st.write(model.predict_proba(input))
+        
