@@ -1,1 +1,0 @@
-default_ix = cat_feat.index('diabetes')
