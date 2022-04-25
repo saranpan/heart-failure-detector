@@ -162,15 +162,15 @@ if selected == 'Home':
     clear_old_cach()
 
     with st.container():
-        left_column , right_column = st.columns((1,2))
-        with left_column:
-            st.subheader("Hi, I am Hobot :wave: :man: ")
-            st.title("An A.I Robot who is cardiologists")
-            st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")
-            st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")
+        #left_column , right_column = st.columns((1,0))
+        #with left_column:
+        st.subheader("Hi, I am Hobot :wave: :man: ")
+        st.title("An A.I Robot who is cardiologists")
+        st.write("I'm willing to assist a heart disease patients to prevent death, I was trained by Saran P.")
+        st.write("[Check out my trainer linkedin profile >](https://www.linkedin.com/in/saran-pannasuriyaporn-1104071ab/)")
         
-        with right_column:
-            st.image(img_brand,width=1500)
+        #with right_column:
+        #    st.image(img_brand,width=1500)
     with st.container():
         st.write("---")
         left_column , right_column = st.columns(2)
