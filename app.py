@@ -42,6 +42,7 @@ st.set_page_config(page_title='Hobot',page_icon=':man:',
 # Hide hamburget and footer
 hide_streamlit_style = """
             <style>
+            #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
