@@ -11,4 +11,3 @@ plotly==5.3.1
 pyxlsb==1.0.9
 XlsxWriter==3.0.3
 statsmodels==0.12.2
-opendatasets==0.1.22

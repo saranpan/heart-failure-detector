@@ -1,5 +1,5 @@
 #from data import import_dataset
-from package.util import import_dataset, cat_num_feature_seperator, statistical_inference
+from package.util import cat_num_feature_seperator, statistical_inference
 import numpy as np, pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -31,7 +31,7 @@ from streamlit_chat import message as st_message
 pickled_model = load(open('model.pkl', 'rb'))
 
 #import the data (we once used)
-import_dataset('https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data')
+#import_dataset('https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data')
 
 
 # Streamlit page
