@@ -13,6 +13,7 @@ from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
 
 import requests
+from urllib.request import urlopen
 from pickle import load
 from copy import deepcopy
 from PIL import Image
@@ -134,12 +135,12 @@ lottie_dr3 = load_lottie_url('https://assets6.lottiefiles.com/packages/lf20_cbaj
 lottie_dr4 = load_lottie_url('https://assets4.lottiefiles.com/packages/lf20_8zle4p5u.json')
 lottie_dr5 = load_lottie_url('https://assets5.lottiefiles.com/packages/lf20_nhp1heev.json')
 
-img_tree_2 = Image.open('static\graph_tree\dtree_render 1.png')
-img_tree_51 = Image.open('static\graph_tree\dtree_render 50.png')
-img_tree_89 = Image.open('static\graph_tree\dtree_render 88.png')
+img_tree_2 = Image.open(urlopen('https://github.com/wallik2/heart-failure-detector/blob/main/static/graph_tree/dtree_render%201.png?raw=true'))
+img_tree_51 = Image.open(urlopen('https://github.com/wallik2/heart-failure-detector/blob/main/static/graph_tree/dtree_render%2050.png?raw=true'))
+img_tree_89 = Image.open(urlopen('https://github.com/wallik2/heart-failure-detector/blob/main/static/graph_tree/dtree_render%2088.png?raw=true'))
 img = [img_tree_2,img_tree_51,img_tree_89]
-img_cfm = Image.open('static\confusion_matrix.png')
-img_brand = Image.open('static\Intro.png')
+img_cfm = Image.open(urlopen('https://github.com/wallik2/heart-failure-detector/blob/main/static/confusion_matrix.png?raw=true'))
+#img_brand = Image.open('static\Intro.png')
 
 
 

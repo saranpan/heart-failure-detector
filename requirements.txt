@@ -11,3 +11,5 @@ plotly==5.3.1
 pyxlsb==1.0.9
 XlsxWriter==3.0.3
 statsmodels==0.12.2
+urllib3==1.26.7
+requests==2.26.0
