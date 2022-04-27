@@ -43,11 +43,10 @@ st.set_page_config(page_title='Hobot',page_icon=':man:',
 # Hide hamburget and footer
 hide_streamlit_style = """
             <style>
-            #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
-#st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 @st.experimental_memo
 def get_data(map=False,reverse_map=False):
