@@ -467,7 +467,7 @@ elif selected == 'Insight':
             button_g = st.button("Generate a Report")        
 
             if button_g:
-                report = ProfileReport(query_df,title="An overview of 299 patients",explorative=False,
+                report = ProfileReport(query_df,title="An overview of 299 patients",explorative=True,
                                         missing_diagrams={'bar':False,'matrix':False,'heatmap':False,'dendrogram':False},
                                         samples={"head": 0, "tail": 0})
                 st_profile_report(report)
