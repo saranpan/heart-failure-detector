@@ -47,7 +47,7 @@ hide_streamlit_style = """
             footer {visibility: hidden;}
             </style>
             """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+#st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 @st.experimental_memo
 def get_data(map=False,reverse_map=False):
