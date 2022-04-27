@@ -36,13 +36,14 @@ pickled_model = load(open('model.pkl', 'rb'))
 
 
 # Streamlit page
-st.set_page_config(page_title='Hobot',page_icon=':man:',
+st.set_page_config(page_title='Hobot',page_icon='👨‍⚕️',
                     layout="wide"
-     )
+                    )
 
 # Hide hamburget and footer
 hide_streamlit_style = """
             <style>
+            # MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
