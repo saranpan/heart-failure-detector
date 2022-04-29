@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+   <style class="adjust-screen-brightness" media="screen">html:before {
+      content: " ";
+      z-index: 2147483647;
+      pointer-events: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.1);
+      }
+   </style>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Hobot documentary</title>
+      <link rel="shortcut icon" href="https://avatars.dicebear.com/api/miniavs/42.svg">
+      <meta name="referrer" content="strict-origin-when-cross-origin">
+      <style type="text/css" nonce="">
+         @import url("https://fonts.googleapis.com/css?family=Google+Sans");
+         @import url("https://fonts.googleapis.com/css?family=Roboto");
+         body {
+         font-family: Roboto, arial, sans, sans-serif;
+         margin: 0;
+         }
+         iframe {
+         border: 0;
+         frameborder: 0;
+         height: 100%;
+         width: 100%;
+         }
+         #banners {
+         align-items: center;
+         background: rgb(255, 255, 255);
+         display: block;
+         justify-content: space-between;
+         position: fixed;
+         top: 0;
+         width: 100%;
+         z-index: 100;
+         }
+         #banners #publish-banner {
+         background-color: #fed4e8;
+         border-bottom: 1px #ccc solid;
+         color: #202124;
+         display: flex;
+         flex: 1 1 0%;
+         height: 60px;
+         width: 100%;
+         }
+         #publish-banner-icon {
+         display: flex;
+         fill: #f51331;
+         margin: auto 20px;
+         }
+         #publish-banner-text {
+         flex-grow: 1;
+         margin: auto 0;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+         }
+         #publish-banner-buttons {
+         margin: auto 25px auto 0;
+         }
+         #publish-banner-buttons span {
+         align-self: center;
+         background-color: inherit;
+         border: none;
+         font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+         margin: 0 16px 0 32px;
+         }
+         #publish-banner-buttons a {
+         color: #d72b58;
+         cursor: pointer;
+         font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+         font-size: 14px;
+         font-weight: 500;
+         line-height: 24px;
+         text-decoration: none;
+         }
+         #banners #title-banner {
+         background: white;
+         border-bottom: 1px #ccc solid;
+         display: flex;
+         flex: 1 1 0%;
+         height: 60px;
+         width: 100%;
+         }
+         #banners #title-banner #title {
+         flex-grow: 1;
+         font-family: 'Google Sans';
+         font-size: large;
+         margin: auto 0 auto 20px;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+         width: 70%;
+         }
+         #banners #title-banner #interval {
+         margin: auto 25px auto 0;
+         font-family: Roboto;
+         font-size: small;;
+         }
+         #footer {
+         background: #f0f0f0;
+         border-bottom: 1px #ccc solid;
+         bottom: 0;
+         font-family: Roboto;
+         font-size: small;
+         padding: 10px 10px;
+         position: fixed;
+         text-align: center;
+         width: 100%;
+         }
+         #contents {
+         padding: 100px 20% 50px 20%;
+         }
+         @media only screen and (max-device-width: 800px) {
+         #banners #title-banner {
+         border-bottom-width: 5px;
+         height: auto;
+         display: block;
+         }
+         #banners #title-banner #title {
+         font-size: 3em;
+         margin: auto 0 auto 20px;
+         width: 90%;
+         }
+         #banners #title-banner #interval {
+         font-size: 1.5em;
+         margin: 10px 0 auto 25px;
+         }
+         #contents {
+         padding: 150px 5% 80px;
+         }
+         #footer {
+         font-size: 2em;
+         }
+         }
+         .dash {
+         padding: 0 6px;
+         }
+      </style>
+      <script src="chrome-extension://ppdnkejgcieghdpjnjokjeefbojbjdaa/umpc-communicator.js"></script><script src="chrome-extension://ppdnkejgcieghdpjnjokjeefbojbjdaa/umpc-parent.js"></script><script src="chrome-extension://ppdnkejgcieghdpjnjokjeefbojbjdaa/umpc-endpoint.js"></script>
+   </head>
+   <body class="vsc-initialized">
+      <div id="banners">
+         <div id="publish-banner">
+            <span id="publish-banner-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+                  <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+               </svg>
+            </span>
+            <div id="publish-banner-text">You are currently on Hobot documentary</div>
+            <div id="publish-banner-buttons"><span><a href="https://github.com/wallik2/heart-failure-detector/issues">Report issues</a></span></div>
+         </div>
+         <div id="title-banner">
+            <div id="title">Hobot, An AI Cardiologist</div>
+            <div id="interval"><a href="https://hobotai.herokuapp.com/">https://hobotai.herokuapp.com/</a></div>
+
+         </div>
+      </div>
+      <div id="contents">
+         <style type="text/css">@import url('https://themes.googleusercontent.com/fonts/css?kit=OPeqXG-QxW3ZD8BtmPikfA');.lst-kix_vhpio7xjyzq8-1>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-1}ol.lst-kix_vhpio7xjyzq8-7{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-6{list-style-type:none}.lst-kix_74dgcdn0rj2-4>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-4}ol.lst-kix_vhpio7xjyzq8-8{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-3{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-2{list-style-type:none}ol.lst-kix_74dgcdn0rj2-0.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-0 0}ol.lst-kix_vhpio7xjyzq8-5{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-4{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-1{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-0{list-style-type:none}.lst-kix_vhpio7xjyzq8-7>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-7}ol.lst-kix_74dgcdn0rj2-3.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-3 0}.lst-kix_74dgcdn0rj2-3>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-3}.lst-kix_vhpio7xjyzq8-6>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-6}.lst-kix_vhpio7xjyzq8-0>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-0}ol.lst-kix_vhpio7xjyzq8-7.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-7 0}ol.lst-kix_74dgcdn0rj2-6.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-6 0}.lst-kix_vhpio7xjyzq8-2>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-2,lower-roman) ". "}.lst-kix_vhpio7xjyzq8-1>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-1,lower-latin) ". "}.lst-kix_vhpio7xjyzq8-0>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-0,decimal) ". "}.lst-kix_74dgcdn0rj2-0>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-0,decimal) ". "}.lst-kix_74dgcdn0rj2-1>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-1,lower-latin) ". "}.lst-kix_74dgcdn0rj2-3>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-3,decimal) ". "}.lst-kix_74dgcdn0rj2-2>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-2,lower-roman) ". "}ol.lst-kix_74dgcdn0rj2-8.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-8 0}ol.lst-kix_74dgcdn0rj2-2.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-2 0}.lst-kix_74dgcdn0rj2-5>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-5,lower-roman) ". "}.lst-kix_74dgcdn0rj2-7>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-7,lower-latin) ". "}ol.lst-kix_vhpio7xjyzq8-6.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-6 0}ol.lst-kix_vhpio7xjyzq8-0.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-0 0}.lst-kix_74dgcdn0rj2-4>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-4,lower-latin) ". "}.lst-kix_74dgcdn0rj2-8>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-8,lower-roman) ". "}.lst-kix_74dgcdn0rj2-5>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-5}.lst-kix_74dgcdn0rj2-8>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-8}.lst-kix_74dgcdn0rj2-2>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-2}ol.lst-kix_vhpio7xjyzq8-3.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-3 0}.lst-kix_74dgcdn0rj2-6>li:before{content:"" counter(lst-ctn-kix_74dgcdn0rj2-6,decimal) ". "}.lst-kix_74dgcdn0rj2-1>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-1}ol.lst-kix_74dgcdn0rj2-4{list-style-type:none}ol.lst-kix_74dgcdn0rj2-5{list-style-type:none}ol.lst-kix_74dgcdn0rj2-5.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-5 0}.lst-kix_vhpio7xjyzq8-4>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-4}ol.lst-kix_74dgcdn0rj2-6{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-8.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-8 0}ol.lst-kix_74dgcdn0rj2-7{list-style-type:none}ol.lst-kix_74dgcdn0rj2-8{list-style-type:none}.lst-kix_74dgcdn0rj2-7>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-7}ol.lst-kix_74dgcdn0rj2-0{list-style-type:none}ol.lst-kix_74dgcdn0rj2-1{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-1.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-1 0}ol.lst-kix_74dgcdn0rj2-2{list-style-type:none}ol.lst-kix_74dgcdn0rj2-3{list-style-type:none}ol.lst-kix_vhpio7xjyzq8-4.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-4 0}.lst-kix_74dgcdn0rj2-0>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-0}ol.lst-kix_74dgcdn0rj2-1.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-1 0}.lst-kix_vhpio7xjyzq8-3>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-3}.lst-kix_vhpio7xjyzq8-3>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-3,decimal) ". "}.lst-kix_vhpio7xjyzq8-4>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-4,lower-latin) ". "}ol.lst-kix_vhpio7xjyzq8-2.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-2 0}.lst-kix_vhpio7xjyzq8-5>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-5,lower-roman) ". "}.lst-kix_vhpio7xjyzq8-2>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-2}ol.lst-kix_74dgcdn0rj2-4.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-4 0}.lst-kix_74dgcdn0rj2-6>li{counter-increment:lst-ctn-kix_74dgcdn0rj2-6}li.li-bullet-0:before{margin-left:-18pt;white-space:nowrap;display:inline-block;min-width:18pt}.lst-kix_vhpio7xjyzq8-6>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-6,decimal) ". "}ol.lst-kix_vhpio7xjyzq8-5.start{counter-reset:lst-ctn-kix_vhpio7xjyzq8-5 0}.lst-kix_vhpio7xjyzq8-7>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-7,lower-latin) ". "}.lst-kix_vhpio7xjyzq8-8>li:before{content:"" counter(lst-ctn-kix_vhpio7xjyzq8-8,lower-roman) ". "}ol.lst-kix_74dgcdn0rj2-7.start{counter-reset:lst-ctn-kix_74dgcdn0rj2-7 0}.lst-kix_vhpio7xjyzq8-5>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-5}.lst-kix_vhpio7xjyzq8-8>li{counter-increment:lst-ctn-kix_vhpio7xjyzq8-8}ol{margin:0;padding:0}table td,table th{padding:0}.c20{border-right-style:solid;padding:2pt 2pt 2pt 2pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#cccccc;vertical-align:bottom;border-right-color:#cccccc;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:159.8pt;border-top-color:#cccccc;border-bottom-style:solid}.c18{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#a6a6a6;vertical-align:top;border-right-color:#d5d5d5;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:77.2pt;border-top-color:#a6a6a6;border-bottom-style:solid}.c34{border-right-style:solid;padding:2pt 2pt 2pt 2pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#cccccc;vertical-align:bottom;border-right-color:#cccccc;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:77.2pt;border-top-color:#cccccc;border-bottom-style:solid}.c21{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#a6a6a6;vertical-align:top;border-right-color:#a6a6a6;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:159.8pt;border-top-color:#a6a6a6;border-bottom-style:solid}.c22{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#a6a6a6;vertical-align:top;border-right-color:#a6a6a6;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:169.4pt;border-top-color:#a6a6a6;border-bottom-style:solid}.c24{border-right-style:solid;padding:2pt 2pt 2pt 2pt;border-bottom-color:#a6a6a6;border-top-width:1pt;border-right-width:1pt;border-left-color:#cccccc;vertical-align:bottom;border-right-color:#cccccc;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:169.4pt;border-top-color:#cccccc;border-bottom-style:solid}.c1{background-color:#ffffff;color:#31333f;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Arial";font-style:normal}.c16{background-color:#ffffff;color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Arial";font-style:normal}.c8{color:#333333;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:10pt;font-family:"Roboto";font-style:normal}.c9{color:#000000;font-weight:700;text-decoration:none;vertical-align:baseline;font-size:16pt;font-family:"Times New Roman";font-style:normal}.c14{color:#000000;font-weight:700;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:"Times New Roman";font-style:normal}.c12{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:"Times New Roman";font-style:normal}.c5{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c10{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:15pt;font-family:"Arial";font-style:normal}.c15{text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline}.c26{color:#000000;font-weight:400;font-size:10pt;font-family:"Arial"}.c7{padding-top:0pt;padding-bottom:0pt;line-height:1.15;text-align:center}.c2{padding-top:0pt;padding-bottom:0pt;line-height:1.15;text-align:left}.c0{font-size:10.5pt;font-family:"Roboto";color:#333333;font-weight:400}.c30{color:#000000;font-weight:400;font-size:16pt;font-family:"Times New Roman"}.c29{color:#000000;font-weight:700;font-size:12pt;font-family:"Times New Roman"}.c23{border-spacing:0;border-collapse:collapse;margin-right:auto}.c33{background-color:#ffffff;max-width:468pt;padding:72pt 72pt 72pt 72pt}.c25{text-decoration:none;vertical-align:baseline;font-style:normal}.c32{font-size:10pt;color:#ea4335;font-weight:700}.c3{orphans:2;widows:2;height:11pt}.c19{padding:0;margin:0}.c4{orphans:2;widows:2}.c11{color:inherit;text-decoration:inherit}.c6{margin-left:36pt;padding-left:0pt}.c28{margin-left:144pt}.c27{margin-left:180pt}.c13{height:15.8pt}.c31{font-size:15pt}.c17{text-indent:36pt}.c35{font-style:italic}.title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#000000;font-size:11pt;font-family:"Arial"}p{margin:0;color:#000000;font-size:11pt;font-family:"Arial"}h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style>
+         <div class="c33">
+            <div>
+               <p class="c2 c3"><span class="c5"></span></p>
+            </div>
+
+            <p><img alt="" src="https://avatars.dicebear.com/api/miniavs/42.svg" style="width: 671.00px; height: 169.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></p>
+            <h1> Hobot documentary </h1>
+            <hr>
+            <br>
+            <p class="c2 c4"><span class="c10">Introduction:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4 c17"><span class="c5">When we talked about the most scary deadly disease, it’s undeniable to not think of Cardiovascular diseases (CVDs), since it was and still is the number 1 cause of death globally.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4 c17"><span class="c5">According to Policy Advice, around 17.9 million lives each year were taken from this disease, which accounts for 31% of all deaths worldwide.We all know that Heart failure is a common event caused by CVDs. Fortunately, most cardiovascular diseases can be prevented by addressing behavioral risk factors such as tobacco use, unhealthy diet and obesity, physical inactivity and harmful use of alcohol using population-wide strategies.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4 c17"><span class="c5">People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) need early detection and management. In this project, we would like to implement all of our statistical, machine learning, and programming knowledge in order to encounter this problem, and let users interact the machine learning model via web application. Hopefully, we also would like to educate the user by visualizing the insight of the data we used</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <hr>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c10">Objective:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <ol class="c19 lst-kix_74dgcdn0rj2-0 start" start="1">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">To implement one of our machine learning models for detecting early signs of heart failure for people who once had heart failure and left ventricular systolic dysfunction before with great accuracy.</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <ol class="c19 lst-kix_74dgcdn0rj2-0" start="2">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">To visualize the insight of the data we used, so the user will be technically educated via our data.</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <ol class="c19 lst-kix_74dgcdn0rj2-0" start="3">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">To make an statistical inference on the sample data</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <ol class="c19 lst-kix_74dgcdn0rj2-0" start="4">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">Everything we created will allowed the user to interact via our web application</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <hr>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c10">Question:</span></p>
+            <p class="c2 c4"><span class="c5">To create a product that satisfies all of our objectives, we need to create right questions in order to obtain them.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">For the Machine learning objective (Predictive task), we decided to mainly choose five of them</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <ol class="c19 lst-kix_vhpio7xjyzq8-0 start" start="1">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">Which machine learning algorithm archive the best performance based on F1 score</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">For the visualization objective, we decided to mainly choose four of them</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <ol class="c19 lst-kix_vhpio7xjyzq8-0" start="2">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">What does the characteristic of each patients distributed (Univariate Analysis)</span></li>
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">Is there any relationship between feature (Bivariate analysis)</span></li>
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">Is there any feature highly correlated to the heart failure (death event)</span></li>
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">What is the mean and standard deviation of each laboratory result with respect to the different group of qualitative features?</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">For the statistical inference objective, we decided to mainly pick </span></p>
+            <ol class="c19 lst-kix_vhpio7xjyzq8-0" start="6">
+               <li class="c2 c4 c6 li-bullet-0"><span class="c5">Is there any significant difference in the proportion of one of qualitative features for each type of qualitative feature?</span></li>
+            </ol>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span>&nbsp;The solution we expected for these questions are in form of a product (web application), we will let the user explore interactively.</span></p>
+            <hr>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c10">Data:</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">To implement machine learning, visualization, and statistical inference, we cannot ignore the used data for our problem. In this case, we wish to obtain the data of the patient who once had heart failure and left ventricular systolic, so our machine learning has something to learn from. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>The dataset was originally uploaded from </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1023-5&amp;sa=D&amp;source=editors&amp;ust=1651211426514693&amp;usg=AOvVaw3r7km4QpXoQxcVO5PfEOhD">the research paper</a></span><span>. Thankfully, there is someone who uploaded this dataset in </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data&amp;sa=D&amp;source=editors&amp;ust=1651211426514982&amp;usg=AOvVaw1-Ji_bRJPCw2NQzZjikx9W">Kaggle</a></span><span class="c5">&nbsp;which is more easy to get the data</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The data of patients that we used was collected at the Faisalabad Institute of Cardiology and at the Allied Hospital in Faisalabad (Punjab, Pakistan), during April–December 2015 [52, 66]. The patients consisted of 105 women and 194 men, and their ages range between 40 and 95 years old. All 299 patients had left ventricular systolic dysfunction and had previous heart failures that put them in classes III or IV of New York Heart Association (NYHA) classification of the stages of heart failure.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The following table shows the features of our dataset.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <a id="t.8a574d0441271588da671cdd4d4f141d9569ef3a"></a><a id="t.0"></a>
+            <table class="c23">
+               <tbody>
+                  <tr class="c13">
+                     <td class="c24" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c32">Feature</span></p>
+                     </td>
+                     <td class="c20" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c32">Explanation</span></p>
+                     </td>
+                     <td class="c34" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c32">Measurement</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Age</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Age of the patient</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Years</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Anaemia</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Decrease of red blood cells or hemoglobin</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Boolean</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">High blood pressure</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">If a patient has hypertension</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Boolean</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Creatinine phosphokinase</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Level of the CPK enzyme in the blood</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">mcg/L</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Diabetes</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">If the patient has diabetes</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Boolean</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Ejection fraction</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Percentage of blood leaving</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Percentage</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Sex</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Woman or man</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Binary</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Platelets</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Platelets in the blood</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">kilo platelets/mL</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Serum creatinine</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Level of creatinine in the blood</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">mg/dL</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Serum sodium</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Level of sodium in the blood</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">mEq/L</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Smoking</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">If the patient smokes</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0">Boolean</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">Time </span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">Follow-up period&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">Days</span></p>
+                     </td>
+                  </tr>
+                  <tr class="c13">
+                     <td class="c22" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">(target) death event</span></p>
+                     </td>
+                     <td class="c21" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">If the patient died during the follow-up period&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+                     </td>
+                     <td class="c18" colspan="1" rowspan="1">
+                        <p class="c2"><span class="c0 c25">Boolean</span></p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Overall, There are 5 categorical features (including target), and 8 numerical features.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <hr>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c10">Web Application:</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>( You could visit by yourself by redirect to this link : </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://hobotai.herokuapp.com/&amp;sa=D&amp;source=editors&amp;ust=1651211426525706&amp;usg=AOvVaw1kBWJt_Pzl7WdrQAkioC4F">https://hobotai.herokuapp.com/</a></span><span class="c5">&nbsp;)<br>Regarding our 6 questions, we decided to launch a web application to answer them called Hobot. Hobot is a disguised A.I Cardiologist. It trained from our dataset, and implemented a Random forest algorithm in order to predict the likelihood of having heart failure again. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Furthermore, it also provides a classroom for a user who really wants to learn an insight from this dataset. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Basically, it can provide you with the data analytic report of the dataset, dashboard of the insight of data, and prediction of heart failure. We will focus on every section of our web application later.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">However, when it comes to building a medical application, we need to put the medical disclaimer in order to prevent the user from being a substitute doctor by this web application. We do not guarantee an accuracy of prediction. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Figure A shows a medical disclaimer I put in my web application, and Figure B shows a reminder to the user before they did the prediction task. The user has to tick our agreement before predicting too.</span></p>
+          
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 671.00px; height: 152.44px;"><img alt="" src="https://lh4.googleusercontent.com/llR7bR66O4gCc-9tcQKDpPiy-Pkl-DlTxUrdcNliVAQxLumoMcrYa5azAWFpAykISFmWzx3RziUsIhR9UUd5pD8qDL5E29ZcvY-wQjeKLJFfZbncC4B4akqHbk5NrJcRBG_Z_l_hLhThNHKaqg" style="width: 671.00px; height: 169.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure A</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <img alt="" src="https://lh6.googleusercontent.com/KSWzwRrF1opuSY8WuAV1eNmXcZn9-mp0eFkZIaNw-_rgG5B2DYnwWMqhmBi8KS4zDVux7_3kPoow6upLjsXx4vfT5s9d2qYMx-2Y1-aIoAlMcp1yWeGdNOG9M7hAa5M_VwWzlBYTDM0ZFTqjqg" style="width: 624.00px; height: 176.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title="">
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure B</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Perhap, you are wondering which programming language this web application relies on.</span></p>
+            <p class="c2 c4"><span class="c5">The majority of languages we use are python, since it allows us to launch web applications, while also allowing us to manipulate the data frame, machine learning, Interactive dashboard plot, statistical inference, and more. &nbsp;</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The rest are the languages that use to make a component of a webpage (HTML, CSS).</span></p>
+            <p class="c2 c4"><span class="c5">Figure C shows the percentage of language used. Figure D shows the overall files we run for this web application. (does not include the model training part which solely is jupyter notebook) </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <img alt="" src="https://lh6.googleusercontent.com/ftmSSh2nw-LH3qKb-Zd5OyVT4E-4IkH3RlXYYGNOSf3aJKsMkIEQfsIHOPuKpWjkFJNyfwtZNS0Ad3A0st4VxRJ5UJSTKhNbqNLeRdb41p2Cnmdr6oVrus1Kgzxdr8oy2P6oCy4NNahBAXauCg" style="width: 416.00px; height: 146.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title="" >
+            <p class="c7 c4"><span class="c5">Figure C</span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 285.33px;"><img alt="" src="https://lh5.googleusercontent.com/6lqvp5v-waMHn0heQzVltaCiOEAIHuJ3YcWJOWLZtlWmhjhEy6BX7FylTZahT7mkgIVAwrX3k8dokrJwZtdRLUauqb2fPx4kdL-glybc_qvd6pPx2ltSxkB5lxEuGyeqJrebUpqOqScLjweNWg" style="width: 624.00px; height: 285.33px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c7 c4"><span class="c5">Figure D</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The random forest model is located at model.pkl as Figure E shows.</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 30.00px;"><img alt="" src="https://lh5.googleusercontent.com/6lqvp5v-waMHn0heQzVltaCiOEAIHuJ3YcWJOWLZtlWmhjhEy6BX7FylTZahT7mkgIVAwrX3k8dokrJwZtdRLUauqb2fPx4kdL-glybc_qvd6pPx2ltSxkB5lxEuGyeqJrebUpqOqScLjweNWg" style="width: 624.00px; height: 285.00px; margin-left: 0.00px; margin-top: -172.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>The folders we showed in Figure D are uploaded </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://github.com/wallik2/heart-failure-detector&amp;sa=D&amp;source=editors&amp;ust=1651211426527930&amp;usg=AOvVaw1_3haC9yKV12XnBvVZB1Zo">here</a></span><span class="c5">.</span></p>
+            <p class="c2 c4"><span>Unfortunately, Figure D does not show the file which I used to train the Machine learning model (Random forest). I will separate the file of the progress of how I train the model </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://github.com/wallik2/heart-failure-detector/blob/pipeline-train/Heart_Failure_prediction.ipynb&amp;sa=D&amp;source=editors&amp;ust=1651211426528198&amp;usg=AOvVaw0ShJfeJeySJdTseyP38nDA">here</a></span><span>.. Which used to return </span><span class="c35">model.pkl</span><span class="c5">&nbsp;file (as shown in figure E).</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c10">Prediction:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c5">This report did not aim to describe the progress of training machine learning thoroughly. Anyway we are going to brief the overall of our training model. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">In brief, our model contains two main components: standardscaler, and random forest with 89 trees. We visualize in figure F. The Random Forest Classifier was chosen as our architecture, since its performance (f1 score) is better among others like Logistic Regression,Support Vector Classifier, and K-nearest neighbor, while standardScaler also improves the performance better than no standardization.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 416.00px; height: 133.00px;"><img alt="" src="https://lh3.googleusercontent.com/gYRFDslNGKAzEKmOehRqsMBjfK3pEiMix16d7iuiQ4LXDRYSPLGEusZI5YeDFY3F-FzdKSrd-3m31YNN7pgIZjU4PY45j6Sn45fHvdnHd--MBnemIPLO0u9E4uE7Ls2kTfqNr933Ewatt5YOtg" style="width: 416.00px; height: 133.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c7 c4"><span class="c5">Figure F</span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Basically, Standard scaler is used to standardize our data, then we input the standardized data to our random forest algorithm which has 89 trees. Each tree does not always return the same output, so the random forest uses an aggregation technique called Majority-Voting. Suppose there are 50 trees that predict this patient as having heart failure, and the rest (49 trees) predict as not having heart failure, then this random forest predicts as having heart failure. What makes each tree different is the dataset they used. Every tree got bootstrapped replicas from the original dataset. Bootstrapping is just a resampling technique that involves sampling with replacement. You may wonder why it has 89 trees, why not 100 or something.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Basically, we used hyperparameter tuning as shown in Figure H, and it turns out that n_estimator = 89 achieves the highest f1 score (the evaluation that focuses on precision and recall score). It achieved 89% F1 score on the training set, and 75% on the test set. The confusion matrix for the test set using by our model shows in Figure G</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 306.00px; height: 262.00px;"><img alt="" src="https://lh5.googleusercontent.com/9hKTCiUkUawkK0hWLV_BfuiGpvvXf_o4he1eBg436k7A1YKhb9AFZFzDDXrE2L6ogcJCekNWQLamgelmD9-KN6hoM4KZURy_toErrYDWtUPzdkk155L2Y_GWEpbiVko3wpwQZRu7XbLWDbJMHw" style="width: 306.00px; height: 262.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c7 c4"><span class="c5">Figure G</span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 597.00px; height: 383.00px;"><img alt="" src="https://lh6.googleusercontent.com/HjQFT0PJA1Zkrzqv4euCSPXWlM-05ursjCpean85v05OFKBSGbNPdwFwQzcrvPB2pLEueYuA5XgYpp24zkTJUj87cI8XCB5M4GDgQp54ugS45XfdiMZ-_XiiJiUmWzqXN0er4HJ2Az6gJ_rJ7g" style="width: 597.00px; height: 383.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure H</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Figure I shows three of the trees in our random forest; tree 2,51,and 89 respectively.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 639.50px; height: 314.83px;"><img alt="" src="https://lh5.googleusercontent.com/4eXdVxLZlxK5egJ-sc20FhoZm-6T3rm-cwpckyYjBru8CBc8vvMoaXjrhbQNsSK3GBvEM8Hl3ziXZkGTZJcV8RLI39sZCpHX5SV8G4x-ML2PbjDeboftyb5LoTchS001fXCvwUFbuzmEX3Oc8A" style="width: 639.50px; height: 314.83px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 380.00px;"><img alt="" src="https://lh3.googleusercontent.com/dO_XvfqRel8tgo56VN5vNynNoRxru-GTOH0oOmvT-88X-6DNZQFh01Z3BablE3ig95jCbaqVJU_tx1FJ990xalgcpegtIO6kJv0hUI_4Zk-pyXpbID-eBsnilrUc6dPZleCiKChz0p6GEvjgZw" style="width: 624.00px; height: 380.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 306.67px;"><img alt="" src="https://lh5.googleusercontent.com/OksJMqYQIYUrezQSh0tLT5AAX9Bki0S-FCjxFmiB_qV8zcUkJccEjmyoVzbR22h1qIIEL_aefhTA27lHnNkNGuFRgAsOtlN9hUrL1a8UhCHaYc5uIpC3lJWsTq1dsnIZOHyN9ymfQKXbZ0FqhQ" style="width: 624.00px; height: 306.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4 c27 c17"><span class="c5">Figure I</span></p>
+            <p class="c2 c4"><span class="c5">&nbsp;</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Once, we trained it. We can now deploy this model into our web application which is located at the prediction zone.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The below GIF shows the user could interact in the prediction zone using our web application.</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 665.53px; height: 354.10px;"><img alt="" src="https://lh4.googleusercontent.com/45K1XPISR5CGfbRy63yKiJCKNBLa_tw3KSIeTRApX7jQK-oJIox6u7sKQMoymk61MyJXI1h_iKoj6r_wlMW2FVigcChCgf8Vq3lSFngaeYkBKyJEODQDWXLRyoaxU9ks55Kkjlwer6ZenplFNw" style="width: 665.53px; height: 354.10px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Our model does not only return the classification, but also provides the probability of predicting also. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c10">Overview of Data:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c5">Perhap the user does need to see which Hobbit was fed on, so we decided to make an Insight section to let them explore by themselves. The section is shown in Figure J</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 329.33px;"><img alt="" src="https://lh3.googleusercontent.com/wLFeHexJfM8hyAlh_rh1gl3yMxLHsnB0yngbdLYRf42xTCHPnK5BlkRft0NoMkoQRWSZZOEfpAguWKwdibHQ768joYmmwxm77vrmDaYOuqDAHxkBeXDVMLse5iGfmybVilEU6qfREoWylZbU1A" style="width: 624.00px; height: 329.33px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4 c17 c27"><span class="c5">Figure J</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">You may wonder what the left sidebar does. It lets the user filter the characteristics of patients by themselves. The below GIF shows how the dataset changed when the user adjusted it.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 350.67px;"><img alt="" src="https://lh4.googleusercontent.com/dkXtWZYVcD5XJ5CmLt7Byl0CxhYeozkPxIhfbhI6N14rdwqlzL6Og0W-KEvMDUr6i9MaNzA-KU-m6hfqIYP7tpMeiIFn4hztvxk5tXdwb7T-TUh4anR4i_tX0OHCiQoimEha0ItRg1xVcwt2vw" style="width: 624.00px; height: 350.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Our web application also allows people to download the filtered dataset in form of .csv and excel as well, so they could possibly use them to analyze.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Now, sometimes the user does not want to see the whole dataset, but rather than the analytic, hence we allow them to generate the report with the given filtered dataset. The below GIF shows the report for the entire dataset (no filter).</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 332.00px;"><img alt="" src="https://lh6.googleusercontent.com/1Pi7hq0nT8bNC9GB2Z0ZyooKMrJKzg3M2J7ximPcmKSGhIqb7f_C7fLZILU1Ez88U6wYW1t0Y7rWd3DTHtRnX3C9MwIo-wx2QiK_a5S0-xyD6XXUkFCgbkYuRfH9Xc8t_lK_-uD9Mhby-_lSBA" style="width: 624.00px; height: 332.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">This report covers univariate analysis, and bivariate analysis in form of scatter plot, and also correlation of each feature. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Since, there are many variables to cover. I decided to just analyze Age and Diabete variable only.</span></p>
+            <p class="c2 c4"><span class="c5">When you toggle the detail like the GIF below. You observe that there is no clear distribution of the age distribution. It is not monotonic. The patients in this dataset are 40, and the maximum is 95. This is an alternative way to let the user know the limitations of patients. If the user age is out of his range [40,95]. It might not return an accurate result due to extrapolation. </span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 302.67px;"><img alt="" src="https://lh6.googleusercontent.com/RMjZbYTFWtPLGadOut1SI82PN2ZspjSKDZgXCxWmVWoUYONQhvuDvbpzacctffPSmfmZ-gy7LsrUvWLxEyBBmMJNRX4MpIJgvOdmjbRZhgQhiINXwMgTeS8vhcWVvjRj6snEssJ3HihZDhKUiA" style="width: 624.00px; height: 302.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">The peak of the patient's age is 60 (35 patients).</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Figure k shows the summary of Quantile statistics, and descriptive statistics.</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 181.33px;"><img alt="" src="https://lh5.googleusercontent.com/ToEA0DoC10u7dHfUFTMX5nxKbDXLQtI_CroTxU4Z8DdPZ8S8OuReIGfme08v9vAwjW5DbTA8mnF8NSdCPnSwKkqtYDsNKN0CFumWrIC-oYCaXUGeoYnc6nycZ2JCILm9nGwEaPC4ETmE3ZKmSA" style="width: 624.00px; height: 181.33px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4 c27 c17"><span class="c5">Figure k</span></p>
+            <p class="c2 c3 c27 c17"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Next, move on to the categorical feature; Diabete.</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 302.67px;"><img alt="" src="https://lh4.googleusercontent.com/d4gyVsdvXxH0I_ty9KTDmytQ3YTz7FtOe1CHkztcgmCykl34wdaoSx-6MUSQ8fOrTR-wh-IdjgDFzZy-GT_LWTpyj3cpk3C5xWrrYNx8GkE792mxntQ45Wg-7UA1ep7oknw48ruJHJDXroX0Cw" style="width: 624.00px; height: 302.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">58.2% of the patients are diabete, and 41.8% are not.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">In bivariate analysis only concerns the relationship of numerical features. In this case, there are 6 numerical features, so the permutation of every possible interaction plot is (6)(6) = 36. Since it’s too many, then we decided to pick one of them; serum creatine and ejection fraction. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 490.50px; height: 349.01px;"><img alt="" src="https://lh3.googleusercontent.com/gWgzPIV3JHzQDJlSiKAh76msv9erbUUR-pZBAER3P7lZK2WjHFmK4VT6v1mehiLdAVuHcw4knBYqOMgbvPxBYjyu7Akg77cJUui9oPUoQrmC_ARhWIbqsYpqo_rzmjXKG8x8kgDvtghuD4Tm8Q" style="width: 490.50px; height: 349.01px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c7 c4"><span class="c5">Figure L</span></p>
+            <p class="c7 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">According to Figure L, Although there is a no clear linear relationship, the people who is has high ejection fraction tends to have high serum creatine as well.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Now, our goal here is to check which characteristic of the patient lead to more likely to have heart failure the most.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 466.67px;"><img alt="" src="https://lh5.googleusercontent.com/e6mI4HpIxOAFBZKXrTOL_XHVlHgR42n1kqhAI_DC4XxTMEgcMLsoCQ-EUrKbLVUa4MsveXcXlTBSyPyh1R1FtoZzUoVN7yrl8EFDKdkK4XZaMinCWsTYOp-QT3ZagfTkUMDG0hXIXCyzAYqopg" style="width: 624.00px; height: 466.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure M : Pearson Coefficient </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Based on Pearson Coefficient, we obviously observe that the time and DEATH_EVENT are highly negatively correlated. We can interpret that the more patients who recently met the doctor for follow- up are more likely to have a chance of have heart failure again. This makes sense. If you do see them have no heart failure for a long time. It looks like they stay healthy.</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 473.33px;"><img alt="" src="https://lh6.googleusercontent.com/60JwkTwYViWbq0gRZpGdTtCIDole2VhkOw9sgkmS9y6jECD_RUisv6Ht5kTnQk0pFk1znf1DVqXpe0tLDEni3lLJyqLB0BWXr9ODQdCkLcLPPiyZvrfPz24zgPmxm3lnWKxkG7a6_GiYwJef3A" style="width: 624.00px; height: 473.33px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4 c17 c28"><span class="c5">&nbsp;Figure M : PhiK Coefficient </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>According to the </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://phik.readthedocs.io/en/latest/index.html&amp;sa=D&amp;source=editors&amp;ust=1651211426533740&amp;usg=AOvVaw2vllFgdKU_5EzDz7ReQzUY">Phi_K documentary</a></span><span class="c5">, Phik (φk) is a new and practical correlation coefficient that works consistently between categorical, ordinal and interval variables, captures non-linear dependency and reverts to the Pearson correlation coefficient in case of a bivariate normal input distribution.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Perhap the data might not have a strong linear relationship, rather non-linear relationship, one of the metric of correlation that we are using for capturing non-linear relationship is PhiK.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">According to Figure M, we see that the sex and smoking are highly correlated. The interpretation of this required us to observe the grouped barplot from the Inference section.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c31">Statistics Inference:</span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 368.00px;"><img alt="" src="https://lh3.googleusercontent.com/f8q86VhiEUugp2xNs256uinyEmPWKXUISQH12qriV0vtLGvqtncYkfLtzXA7mfkhIq5tI4LdlI-9UJ5RzXXlXS5g3pHAzuJ7yP_IiQr_-7r6qhZ-gA_12aVoeWY9lBzR3RPZH-q3-32AUXCkUQ" style="width: 624.00px; height: 368.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure N</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">According to Figure N, we observed that the female patients are extremely unlikely to smoke. </span></p>
+            <p class="c2 c4"><span class="c5">However, we need to know that Is there any significantly difference between the people who smoking classified by sex. This leads us into the next section. (Inference). The below GIF shows the section.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 332.00px;"><img alt="" src="https://lh4.googleusercontent.com/JjqFYeq6V6tdAHMFYwqQNby-tCHPrTDkAm7TCZlQr6BEfQSuh1VzlT5NgHQJl1o1o4DPuuuy6ySYeyEzUeNGXa_WVHw0UsmgZh451da90pcAIAcwhYUaxcVCpWVAx0Xk3DfX5WnGiTqb9kI5FQ" style="width: 624.00px; height: 332.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4"><span class="c5">The above GIF shows the two proportional Inferences with the alpha level : 0.025. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Hence, we can obtain the following statistical test. </span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 214.67px;"><img alt="" src="https://lh5.googleusercontent.com/tkvR8h9RLvtCRfFoQ8GXsVkl8WYAhB4yOWXzWAL1F4kUmouJSKpOthfpP5xGfCj9x2orLsrgdHF9qpLdw5N0axElbKG-lamT7fRFwCNEGU7UfTh7awwWIvYAuM-2S1NPydDu7mr_QAKXytprug" style="width: 624.00px; height: 214.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>We can conclude that </span><span class="c1">there is significantly difference of the proportion of smoking between each level sex with confidence level 0.975. There are only a 2.5 % chance that our conclusion was wrong.</span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c4"><span class="c1">One more interesting question using this king of statistical inference is that Is there any significantly difference of the proportion of sex between each level diabetes with 2.5% significance level ? We do it again as shown in the below GIF</span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 302.67px;"><img alt="" src="https://lh6.googleusercontent.com/1EUNUgeQA91E6jCOHgj4VJgxGbnadEHOBBFgPrtdfXkqMz29oI8YqV5ifNxcGLaxj-JdhBn991Cf3ccxetV15WSApompbZmf7nDD9FL20kJUNthuTemJ6_uZrb_t7rMk2LLmpoooriPeI0ssyg" style="width: 624.00px; height: 302.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c4"><span class="c1">We then obtain the following statistical test, and conclude that the females are more likely to be diabete more than male. (However, it’s not always true, since the patient who has heart failure and Left ventricular systolic dysfunction does not represent the whole population.)</span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 214.67px;"><img alt="" src="https://lh5.googleusercontent.com/tkvR8h9RLvtCRfFoQ8GXsVkl8WYAhB4yOWXzWAL1F4kUmouJSKpOthfpP5xGfCj9x2orLsrgdHF9qpLdw5N0axElbKG-lamT7fRFwCNEGU7UfTh7awwWIvYAuM-2S1NPydDu7mr_QAKXytprug" style="width: 624.00px; height: 214.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c3"><span class="c1"></span></p>
+            <p class="c2 c4"><span class="c10">Interesting Insight:</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c16">Sometimes, all insight we really want is just the mean and standard deviation of the lab result. Have you ever wondered what the mean and standard deviation of creatine phosphokinase is for the people who will have heart failure and don’t ? The below GIF will resolve your doubt.</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 302.67px;"><img alt="" src="https://lh6.googleusercontent.com/1EUNUgeQA91E6jCOHgj4VJgxGbnadEHOBBFgPrtdfXkqMz29oI8YqV5ifNxcGLaxj-JdhBn991Cf3ccxetV15WSApompbZmf7nDD9FL20kJUNthuTemJ6_uZrb_t7rMk2LLmpoooriPeI0ssyg" style="width: 624.00px; height: 302.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 378.67px;"><img alt="" src="https://lh6.googleusercontent.com/9Jgx8C885O4jWzLPMn7QIa-Wi7zAUg2p-F1uaqRryvlUKODjVQLmnmerTr3y0lcVUsPL00a2qeT_7GgppeK6cN274fbTLs_QOnJ-eTs1_BnQhVP-Gmyx5IJ1WC0p7ykAkVE8cOEebswzsHxXKw" style="width: 624.00px; height: 378.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4 c28 c17"><span class="c16">&nbsp; Figure O</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c16">Perhap, you don’t want to know the insight of every range of age or follow-up period, you could adjust the patient like the following gif. (for example age: [40,60], time:[100,200])</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 302.67px;"><img alt="" src="https://lh6.googleusercontent.com/1EUNUgeQA91E6jCOHgj4VJgxGbnadEHOBBFgPrtdfXkqMz29oI8YqV5ifNxcGLaxj-JdhBn991Cf3ccxetV15WSApompbZmf7nDD9FL20kJUNthuTemJ6_uZrb_t7rMk2LLmpoooriPeI0ssyg" style="width: 624.00px; height: 302.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 392.00px;"><img alt="" src="https://lh3.googleusercontent.com/qTwsJWw4Tjb0_VwGjhwCGTgbCmGeo473e6K9mlad6O2J9JmAk-tv4zs1vMIExFqFlMMjin2_GBpLr1DABqMxWhbIjLqw6coE7HdsJhSRs5lMoqdPMZeDTHJLNdDUVG1QC-4w8jkm_ptWyeXRlQ" style="width: 624.00px; height: 392.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+            <p class="c2 c4 c28 c17"><span class="c16">&nbsp; Figure P : Filtered patient</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c16">If you look carefully, the patients who have heart failure around this range of age and time, there must be more likely to have more Creatine Phosphokinase. (The people who have heart failure again with age : [40:60], time:[100:200] have the mean of CPK around 1000, while no filter, the mean of them are around 500)</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c16">You won’t see any patient who are (relatively) young, but control a good amount of creatinine Phosphokinase level but still have heart failure again.</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c10">Conclusion:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creating a Web application helps the user to explore the data and to help predict the risk of having heart failure again as well. This could be helpful to let them detect the early sign by themselves, although the prediction is not always true.</span></p>
+            <p class="c2 c4"><span class="c16">&nbsp;We observe that generating report. We try to maximize the performance (F1) of them, and turnt out that the Random forest algorithm is the best score. This web application allows them to see how the characteristics of each patient are distributed and also the summary statistics. Although there are no clear relationship between features, but pearson’s coefficient shown us that the time and death event are highly correlated, while PhiK shown us that sex and smoking are highly correlated (which also concern non-lnear relationship). The statistical inference like Two proportion test proves that the patients who are male are more statistically likely to smoke when compared to females . &nbsp;We also observe the mean and standard deviation with the given feature. It turnt out that the patient who are relative young, and a bit long time follow-up period but still have heart failure again are more likely to have high CPK level for both male and female</span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c3"><span class="c16"></span></p>
+            <p class="c2 c4"><span class="c10">Appendix:</span></p>
+            <p class="c2 c3"><span class="c10"></span></p>
+            <p class="c2 c4"><span class="c5">The source code is uploaded via github.</span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span>The whole web application : </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://github.com/wallik2/heart-failure-detector&amp;sa=D&amp;source=editors&amp;ust=1651211426539316&amp;usg=AOvVaw2uCQDqIlPKl7_6L27pDH9D">https://github.com/wallik2/heart-failure-detector</a></span></p>
+            <p class="c2 c4"><span>The model training : </span><span class="c15"><a class="c11" href="https://www.google.com/url?q=https://github.com/wallik2/heart-failure-detector/tree/pipeline-train&amp;sa=D&amp;source=editors&amp;ust=1651211426539783&amp;usg=AOvVaw2mVvjO28zE8q4DrfZ-3ZZB">https://github.com/wallik2/heart-failure-detector/tree/pipeline-train</a></span></p>
+            <p class="c2 c3"><span class="c5"></span></p>
+            <p class="c2 c4"><span class="c5">Once downloaded, run streamlit run app.py on your terminal to launch the web application.</span></p>
+         </div>
+      </div>
+      <script type="text/javascript" nonce="">(function(){/*
+         Copyright The Closure Library Authors.
+         SPDX-License-Identifier: Apache-2.0
+         */
+         function k(){return function(){}}var aa="function"==typeof Object.create?Object.create:function(a){function b(){}b.prototype=a;return new b},ba="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};
+         function ca(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");}var da=ca(this);function ea(a,b){if(b)a:{var c=da;a=a.split(".");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&null!=b&&ba(c,a,{configurable:!0,writable:!0,value:b})}}var l;
+         if("function"==typeof Object.setPrototypeOf)l=Object.setPrototypeOf;else{var m;a:{var fa={a:!0},ha={};try{ha.__proto__=fa;m=ha.a;break a}catch(a){}m=!1}l=m?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}var ia=l;
+         function n(a,b){a.prototype=aa(b.prototype);a.prototype.constructor=a;if(ia)ia(a,b);else for(var c in b)if("prototype"!=c)if(Object.defineProperties){var d=Object.getOwnPropertyDescriptor(b,c);d&&Object.defineProperty(a,c,d)}else a[c]=b[c];a.m=b.prototype}ea("Object.is",function(a){return a?a:function(b,c){return b===c?0!==b||1/b===1/c:b!==b&&c!==c}});
+         ea("Array.prototype.find",function(a){return a?a:function(b,c){a:{var d=this;d instanceof String&&(d=String(d));for(var e=d.length,f=0;f<e;f++){var g=d[f];if(b.call(c,g,f,d)){b=g;break a}}b=void 0}return b}});var p=this||self;function q(a){var b=typeof a;return"object"==b&&null!=a||"function"==b}function ja(a,b){var c=Array.prototype.slice.call(arguments,1);return function(){var d=c.slice();d.push.apply(d,arguments);return a.apply(this,d)}}
+         function ka(a,b){function c(){}c.prototype=b.prototype;a.m=b.prototype;a.prototype=new c;a.prototype.constructor=a;a.D=function(d,e,f){for(var g=Array(arguments.length-2),h=2;h<arguments.length;h++)g[h-2]=arguments[h];return b.prototype[e].apply(d,g)}}function r(a){return a};function t(a){t[" "](a);return a}t[" "]=k();function la(a,b,c){return Object.prototype.hasOwnProperty.call(a,b)?a[b]:a[b]=c(b)};function ma(a){return la(a.prototype,"$$generatedClassName",function(){return"Class$obf_"+{valueOf:function(){return++na}}})}var na=1E3;function u(){}u.prototype.s=function(){return this.j||(Object.defineProperties(this,{j:{value:oa=oa+1|0,enumerable:!1}}),this.j)};u.prototype.toString=function(){var a=w(x(pa(this.constructor)))+"@";var b=(this.s()>>>0).toString(16);return a+w(b)};function y(){}n(y,u);y.prototype.h=function(a){this.g=a;if(a instanceof Object)try{a.v=this}catch(b){}};function qa(a){a.g instanceof Error&&(Error.captureStackTrace?Error.captureStackTrace(a.g):a.g.stack=Error().stack)}y.prototype.toString=function(){var a=x(pa(this.constructor)),b=this.l;return null==b?a:w(a)+": "+w(b)};
+         function ra(a){if(null!=a){var b=a.v;if(null!=b)return b}a instanceof TypeError?(b=new sa,b.l=w(a),qa(b),b.i=a,b.h(new TypeError(b)),a=b):(b=new z,b.l=w(a),qa(b),b.i=a,b.h(Error(b)),a=b);return a};function A(){}n(A,y);function B(){}n(B,A);function z(){}n(z,B);z.prototype.h=function(a){B.prototype.h.call(this,"__noinit__"===this.i?a:this.i)};function sa(){}n(sa,z);var oa=0;function ta(a,b){return"string"==typeof a?a.charCodeAt(b):a.g(b)};function C(){}var ua,va;n(C,u);function wa(){wa=k();va=new D;ua=new E};function D(){}n(D,C);D.prototype.toString=function(){return""};function E(){}n(E,C);E.prototype.toString=function(){return"unknown"};function w(a){return null==a?"null":a.toString()}function xa(a){return 65536<=a?w(String.fromCharCode((55296+((a-65536|0)>>10&1023)|0)&65535))+w(String.fromCharCode((56320+((a-65536|0)&1023)|0)&65535)):String.fromCharCode(a&65535)}function ya(a,b){var c=b,d=a.length,e;b=ta(a,(e=c,c=c+1|0,e));var f;if(e=55296<=b&&56319>=b&&c<d)a=f=ta(a,c),e=56320<=a&&57343>=a;var g;e?g=65536+((b&1023)<<10)+(f&1023)|0:g=b;return g};function F(a,b){this.g=a;this.h=b}n(F,u);function x(a){if(0!=a.h){var b="L"+w(ma(a.g))+";";a=a.h;for(var c="",d=0;d<a;d=d+1|0)c=w(c)+"[";return w(c)+w(b)}return ma(a.g)}F.prototype.toString=function(){return"class "+w(x(this))};function pa(a){return la(a.prototype,"$$class/0",function(){return new F(a,0)})};function za(a){var b=a;try{var c;if(c="www.google.com"===Aa(a)){var d=Ba(a)[5];c="/url"===G(d,!0)}if(c){var e=Ca(a,"q");b=e?e:Ca(a,"url")}}catch(f){if(f=ra(f),!(f instanceof A))throw f.g;}return null!=b?b:""};function G(a,b){return null==a?a:b?decodeURI(a):decodeURIComponent(a)};var Da;function Ba(a){H();a=Da.exec(a);for(var b=[],c=0;7>=c;c=c+1|0)a.length<=c||null==a[c]?b.push(null):b.push(a[c]);return b}function Aa(a){a=Ba(a);return G(a[3],!0)}
+         function Ca(a,b){H();var c=a.indexOf(xa(35));c=0>c?a.length:c;a:{var d=0;for(var e=b.length;0<(d=a.indexOf(b,d))&&d<c;){var f=ya(a,d-1|0);if(38==f||63==f){if((d+e|0)>=a.length)break a;f=ya(a,d+e|0);if(61==f||38==f||35==f)break a}d=d+(e+1)|0}d=-1}if(0>d)return null;e=a.indexOf(xa(38),d);if(0>e||e>c)e=c;d=d+(b.length+1)|0;b=Math.min(a.length,d);a=a.substr(b,Math.min(a.length,Math.max(d,e))-b|0);c=" ";for(b=0;0<=(b=c.indexOf("\\",b));)36==c.charCodeAt(b+1|0)?(d=w(c.substr(0,b|0))+"$",e=b=b+1|0,c=d+w(c.substr(e))):
+         (d=w(c.substr(0,b|0)),e=b=b+1|0,c=d+w(c.substr(e)));a=a.replace(RegExp("\\+","g"),c);return G(a,!1)}function H(){H=k();Da=RegExp("^(?:([^:/?#.]+):)?(?://(?:([^/?#]*)@)?([^/#?]*?)(?::([0-9]+))?(?=[/#?]|$))?([^?#]+)?(?:\\?([^#]*))?(?:#([\\S\\s]*))?$")};function Ea(){Ea=k();Fa||Ga()};var Ha=/&/g,Ia=/</g,Ja=/>/g,Ka=/"/g,La=/'/g,Ma=/\x00/g,Na=/[\x00&<>"']/;var Oa=null,I;I=null;function J(){var a;if(null==Oa)a:{if(a=p.navigator)if(a=a.userAgent)break a;a=""}else a=Oa;return a}function K(a){return-1!=J().indexOf(a)};function Pa(){var a=I;return!!a&&0<a.brands.length}function Qa(a){a.forEach(k())}function Ra(){for(var a=J(),b=RegExp("([A-Z][\\w ]+)/([^\\s]+)\\s*(?:\\((.*?)\\))?","g"),c=[],d;d=b.exec(a);)c.push([d[1],d[2],d[3]||void 0]);Qa(c)}function Ga(){Pa()?I.brands.find(function(a){return"Firefox"===a.brand}):Ra()};var Sa=Array.prototype.indexOf?function(a,b){return Array.prototype.indexOf.call(a,b,void 0)}:function(a,b){if("string"===typeof a)return"string"!==typeof b||1!=b.length?-1:a.indexOf(b,0);for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)return c;return-1};var Ta=Pa()?!1:K("Trident")||K("MSIE"),Ua=K("Edge")||Ta,Va=K("Gecko")&&!(-1!=J().toLowerCase().indexOf("webkit")&&!K("Edge"))&&!(K("Trident")||K("MSIE"))&&!K("Edge"),Fa=-1!=J().toLowerCase().indexOf("webkit")&&!K("Edge"),Wa=I,Xa=Wa&&Wa.platform?"macOS"===I.platform:K("Macintosh");function Ya(a){a&&"function"==typeof a.u&&a.u()};function L(){this.h=this.h;this.g=this.g}L.prototype.h=!1;L.prototype.u=function(){this.h||(this.h=!0,this.j())};L.prototype.j=function(){if(this.g)for(;this.g.length;)this.g.shift()()};function Za(a,b,c){for(var d in a)b.call(c,a[d],d,a)};var M;function N(a,b){this.i=a===$a&&b||"";this.j=ab}N.prototype.h=!0;N.prototype.g=function(){return this.i};var ab={},$a={};function O(a,b){this.i=b===P?a:""}O.prototype.h=!0;O.prototype.g=function(){return this.i.toString()};O.prototype.toString=function(){return this.i.toString()};function Q(a){return a instanceof O&&a.constructor===O?a.i:"type_error:SafeUrl"}var bb=/^data:(.*);base64,[a-z0-9+\/]+=*$/i,cb=/^(?:(?:https?|mailto|ftp):|[^:/?#]*(?:[/?#]|$))/i;function db(a){if(a instanceof O)return a;a="object"==typeof a&&a.h?a.g():String(a);cb.test(a)||(a="about:invalid#zClosurez");return new O(a,P)}
+         var P={},eb=new O("about:invalid#zClosurez",P);var fb={};function R(a,b,c){this.i=c===fb?a:"";this.h=!0}R.prototype.g=function(){return this.i.toString()};R.prototype.toString=function(){return this.i.toString()};function gb(a,b,c,d){a=a instanceof O?a:db(a);b=b||p;c=c instanceof N?c instanceof N&&c.constructor===N&&c.j===ab?c.i:"type_error:Const":c||"";return void 0!==d?b.open(Q(a),c,d):b.open(Q(a),c)};function S(a,b){this.type=a;this.target=b;this.i=!1}S.prototype.g=function(){this.i=!0};var hb=function(){if(!p.addEventListener||!Object.defineProperty)return!1;var a=!1,b=Object.defineProperty({},"passive",{get:function(){a=!0}});try{p.addEventListener("test",k(),b),p.removeEventListener("test",k(),b)}catch(c){}return a}();function T(a){S.call(this,a?a.type:"");this.relatedTarget=this.target=null;this.button=this.screenY=this.screenX=this.clientY=this.clientX=0;this.key="";this.metaKey=this.shiftKey=this.altKey=this.ctrlKey=!1;this.state=null;this.pointerId=0;this.pointerType="";this.h=null;if(a){var b=this.type=a.type,c=a.changedTouches&&a.changedTouches.length?a.changedTouches[0]:null;this.target=a.target||a.srcElement;var d=a.relatedTarget;if(d){if(Va){a:{try{t(d.nodeName);var e=!0;break a}catch(f){}e=!1}e||(d=null)}}else"mouseover"==
+         b?d=a.fromElement:"mouseout"==b&&(d=a.toElement);this.relatedTarget=d;c?(this.clientX=void 0!==c.clientX?c.clientX:c.pageX,this.clientY=void 0!==c.clientY?c.clientY:c.pageY,this.screenX=c.screenX||0,this.screenY=c.screenY||0):(this.clientX=void 0!==a.clientX?a.clientX:a.pageX,this.clientY=void 0!==a.clientY?a.clientY:a.pageY,this.screenX=a.screenX||0,this.screenY=a.screenY||0);this.button=a.button;this.key=a.key||"";this.ctrlKey=a.ctrlKey;this.altKey=a.altKey;this.shiftKey=a.shiftKey;this.metaKey=
+         a.metaKey;this.pointerId=a.pointerId||0;this.pointerType="string"===typeof a.pointerType?a.pointerType:ib[a.pointerType]||"";this.state=a.state;this.h=a;a.defaultPrevented&&T.m.g.call(this)}}ka(T,S);var ib={2:"touch",3:"pen",4:"mouse"};T.prototype.g=function(){T.m.g.call(this);var a=this.h;a.preventDefault?a.preventDefault():a.returnValue=!1};var U="closure_listenable_"+(1E6*Math.random()|0);var jb=0;function kb(a,b,c,d,e){this.listener=a;this.proxy=null;this.src=b;this.type=c;this.capture=!!d;this.h=e;this.key=++jb;this.g=this.o=!1}function lb(a){a.g=!0;a.listener=null;a.proxy=null;a.src=null;a.h=null};function V(a){this.src=a;this.g={};this.h=0}V.prototype.add=function(a,b,c,d,e){var f=a.toString();a=this.g[f];a||(a=this.g[f]=[],this.h++);var g;a:{for(g=0;g<a.length;++g){var h=a[g];if(!h.g&&h.listener==b&&h.capture==!!d&&h.h==e)break a}g=-1}-1<g?(b=a[g],c||(b.o=!1)):(b=new kb(b,this.src,f,!!d,e),b.o=c,a.push(b));return b};var mb="closure_lm_"+(1E6*Math.random()|0),nb={},ob=0;function pb(a,b,c,d,e){if(d&&d.once)return qb(a,b,c,d,e);if(Array.isArray(b)){for(var f=0;f<b.length;f++)pb(a,b[f],c,d,e);return null}c=rb(c);return a&&a[U]?a.g(b,c,q(d)?!!d.capture:!!d,e):sb(a,b,c,!1,d,e)}
+         function sb(a,b,c,d,e,f){if(!b)throw Error("Invalid event type");var g=q(e)?!!e.capture:!!e,h=tb(a);h||(a[mb]=h=new V(a));c=h.add(b,c,d,g,f);if(c.proxy)return c;d=ub();c.proxy=d;d.src=a;d.listener=c;if(a.addEventListener)hb||(e=g),void 0===e&&(e=!1),a.addEventListener(b.toString(),d,e);else if(a.attachEvent)a.attachEvent(vb(b.toString()),d);else if(a.addListener&&a.removeListener)a.addListener(d);else throw Error("addEventListener and attachEvent are unavailable.");ob++;return c}
+         function ub(){function a(c){return b.call(a.src,a.listener,c)}var b=wb;return a}function qb(a,b,c,d,e){if(Array.isArray(b)){for(var f=0;f<b.length;f++)qb(a,b[f],c,d,e);return null}c=rb(c);return a&&a[U]?a.h(b,c,q(d)?!!d.capture:!!d,e):sb(a,b,c,!0,d,e)}
+         function xb(a){if("number"!==typeof a&&a&&!a.g){var b=a.src;if(b&&b[U])b.i(a);else{var c=a.type,d=a.proxy;b.removeEventListener?b.removeEventListener(c,d,a.capture):b.detachEvent?b.detachEvent(vb(c),d):b.addListener&&b.removeListener&&b.removeListener(d);ob--;if(c=tb(b)){d=a.type;if(d in c.g){var e=c.g[d],f=Sa(e,a),g;(g=0<=f)&&Array.prototype.splice.call(e,f,1);g&&(lb(a),0==c.g[d].length&&(delete c.g[d],c.h--))}0==c.h&&(c.src=null,b[mb]=null)}else lb(a)}}}
+         function vb(a){return a in nb?nb[a]:nb[a]="on"+a}function wb(a,b){if(a.g)a=!0;else{b=new T(b,this);var c=a.listener,d=a.h||a.src;a.o&&xb(a);a=c.call(d,b)}return a}function tb(a){a=a[mb];return a instanceof V?a:null}var yb="__closure_events_fn_"+(1E9*Math.random()>>>0);function rb(a){if("function"===typeof a)return a;a[yb]||(a[yb]=function(b){return a.handleEvent(b)});return a[yb]};function W(a){L.call(this);this.l=a;this.i={}}ka(W,L);var zb=[];function Ab(a){Za(a.i,function(b,c){this.i.hasOwnProperty(c)&&xb(b)},a);a.i={}}W.prototype.j=function(){W.m.j.call(this);Ab(this)};W.prototype.handleEvent=function(){throw Error("EventHandler.handleEvent not implemented");};function Bb(a,b,c,d){b=void 0===b?!1:b;c=void 0===c?!1:c;d=void 0===d?"editors":d;L.call(this);this.i=a||document.body;this.s=!!b;this.A=!!c;this.B=d;this.l=new W(this);a=ja(Ya,this.l);this.h?a():(this.g||(this.g=[]),this.g.push(a));a=this.l;b=this.i;c=this.C;d="click";Array.isArray(d)||(d&&(zb[0]=d.toString()),d=zb);for(var e=0;e<d.length;e++){var f=pb(b,d[e],c||a.handleEvent,!1,a.l||a);if(!f)break;a.i[f.key]=f}}n(Bb,L);
+         Bb.prototype.C=function(a){if(!(0!=a.h.button||Xa&&a.ctrlKey||a.i))for(var b=a.target;b&&b!=this.i;){if(b.tagName&&"a"==b.tagName.toLowerCase()){var c=b.getAttribute("href")||b.getAttributeNS("http://www.w3.org/1999/xlink","href"),d=za(c);if(c!=d){a:{b=void 0;Ea();try{b=Aa(d)}catch(v){v=ra(v);if(v instanceof A){b=!1;break a}throw v.g;}var e;if(e=null!=b){e=(wa(),va);var f=ua;b=Object.is(e,f)||null==e&&null==f?b.toLocaleLowerCase():b.toLowerCase();e=".google.com"===b.substr(b.length-11|0,11)}b=e}if(!b)if(this.A){c=
+         za(d);if(Object.is(c,d)||null==c&&null==d)d="//www.google.com/url?q="+w(encodeURIComponent(d)),d=w(d)+"&sa=D";d+="&source="+this.B}else d=this.s?c:d;var g=d;b=void 0;c={target:"_blank",noreferrer:!0};d=window;g instanceof O?e=g:(e="undefined"!=typeof g.href?g.href:String(g),e instanceof O||(e="object"==typeof e&&e.h?e.g():String(e),cb.test(e)?e=new O(e,P):(e=String(e),e=e.replace(/(%0A|%0D)/g,""),e=e.match(bb)?new O(e,P):null)),e=e||eb);var h=void 0!==self.crossOriginIsolated;f="strict-origin-when-cross-origin";
+         window.Request&&(f=(new Request("/")).referrerPolicy);var Db="unsafe-url"===f;f=c.noreferrer;if(h&&f){if(Db)throw Error("Cannot use the noreferrer option on a page that sets a referrer-policy of `unsafe-url` in modern browsers!");f=!1}g=c.target||g.target;h=[];for(b in c)switch(b){case "width":case "height":case "top":case "left":h.push(b+"="+c[b]);break;case "target":case "noopener":case "noreferrer":break;default:h.push(b+"="+(c[b]?1:0))}b=h.join(",");if((K("iPhone")&&!K("iPod")&&!K("iPad")||K("iPad")||
+         K("iPod"))&&d.navigator&&d.navigator.standalone&&g&&"_self"!=g)c="A",b=document,c=String(c),"application/xhtml+xml"===b.contentType&&(c=c.toLowerCase()),b=c=b.createElement(c),e=e instanceof O?e:db(e),b.href=Q(e),c.target=g,f&&(c.rel="noreferrer"),b=document.createEvent("MouseEvent"),b.initMouseEvent("click",!0,!0,d,1),c.dispatchEvent(b);else if(f){if(d=gb("",d,g,b),c=Q(e),d){Ua&&-1!=c.indexOf(";")&&(c="'"+c.replace(/'/g,"%27")+"'");d.opener=null;""===c&&(c="javascript:''");Na.test(c)&&(-1!=c.indexOf("&")&&
+         (c=c.replace(Ha,"&amp;")),-1!=c.indexOf("<")&&(c=c.replace(Ia,"&lt;")),-1!=c.indexOf(">")&&(c=c.replace(Ja,"&gt;")),-1!=c.indexOf('"')&&(c=c.replace(Ka,"&quot;")),-1!=c.indexOf("'")&&(c=c.replace(La,"&#39;")),-1!=c.indexOf("\x00")&&(c=c.replace(Ma,"&#0;")));c='<meta name="referrer" content="no-referrer"><meta http-equiv="refresh" content="0; url='+c+'">';if(void 0===M)if(b=null,(e=p.trustedTypes)&&e.createPolicy){try{b=e.createPolicy("goog#html",{createHTML:r,createScript:r,createScriptURL:r})}catch(v){p.console&&
+         p.console.error(v.message)}M=b}else M=b;c=(b=M)?b.createHTML(c):c;c=new R(c,null,fb);(d=d.document)&&d.write&&(d.write(c instanceof R&&c.constructor===R?c.i:"type_error:SafeHtml"),d.close())}}else(d=gb(e,d,g,b))&&c.noopener&&(d.opener=null);a.g();break}}b=b.parentNode}};function Cb(a,b,c,d){new Bb(a,void 0===b?!1:b,void 0===c?!1:c,d)}var X=["DOCS_installLinkReferrerSanitizer"],Y=p;X[0]in Y||"undefined"==typeof Y.execScript||Y.execScript("var "+X[0]);
+         for(var Z;X.length&&(Z=X.shift());)X.length||void 0===Cb?Y[Z]&&Y[Z]!==Object.prototype[Z]?Y=Y[Z]:Y=Y[Z]={}:Y[Z]=Cb;}).call(this);
+      </script><script type="text/javascript" nonce="">DOCS_installLinkReferrerSanitizer( undefined,  true,  true, 'docs');</script>
+   </body>
+</html>
