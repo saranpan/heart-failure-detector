@@ -37,13 +37,16 @@ pickled_model = load(open('model.pkl', 'rb'))
 
 # Streamlit page
 st.set_page_config(page_title='Hobot',page_icon='👨‍⚕️',
-                    layout="wide"
+                    layout="wide",
+                    menu_items={
+                                'Get Help': 'https://wallik2.github.io/heart-failure-detector/',
+                                'Report a bug': "https://github.com/wallik2/heart-failure-detector/issues",
+                                'About': "# This app is made by Saran Pannasuriyaporn and powered by Streamlit"}
                     )
 
 # Hide hamburget and footer
 hide_streamlit_style = """
             <style>
-            # MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
