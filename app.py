@@ -4,7 +4,6 @@ import numpy as np, pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 from pandas_profiling import ProfileReport
 
 import base64
