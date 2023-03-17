@@ -466,7 +466,7 @@ elif selected == 'Insight':
                                         file_name='query_dataset.xlsx')
 
         with st.container():
-            button_g = st.button("Generate a Report")        
+            button_g = st.button("Generate a Report",disabled=True)        
 
             if button_g:
                 report = ProfileReport(query_df,title="An overview of 299 patients",explorative=True,
